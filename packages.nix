@@ -7,7 +7,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    git
     htop
     neofetch
     vim
@@ -23,14 +22,22 @@
     (steam.override { extraLibraries = pkgs: [ pkgs.gperftools ]; })
     stremio
     qt6.qtimageformats
+    git
+    git-credential-oauth
   ];
   
   systemd.packages = with pkgs; [
     cloudflare-warp
   ];
-  
+
   #systemd.targets.multi-user.wants = [
   #  "warp-svc.service"
   #];
 
+  programs.git = {
+    enable = true;
+    config = {
+      credential.helper = "${pkgs.git-credential-oauth}/bin/git-credential-oauth";
+    };
+  };
 }
