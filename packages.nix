@@ -43,4 +43,9 @@
       credential.helper = "${pkgs.git-credential-oauth}/bin/git-credential-oauth";
     };
   };
+
+  # Extra Fonts
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  ];
 }
