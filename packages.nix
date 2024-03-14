@@ -7,23 +7,26 @@
   };
 
   environment.systemPackages = with pkgs; [
-    htop
-    neofetch
+    
+    # CLI apps
+    git
     vim
+    htop
     wget
-    firefox
+    neofetch
     cloudflare-warp
-    (discord.override {
-      withOpenASAR = true;
-    })
+    git-credential-oauth
+
+    # Apps
+
+    firefox
+    stremio
     vscode.fhs
     protonup-qt
-    nur.repos.nltch.spotify-adblock    #for installing spotify-adblock
+    qt6.qtimageformats # WebP Support
+    nur.repos.nltch.spotify-adblock
+    (discord.override { withOpenASAR = true; })
     (steam.override { extraLibraries = pkgs: [ pkgs.gperftools ]; })
-    stremio
-    qt6.qtimageformats
-    git
-    git-credential-oauth
   ];
   
   systemd.packages = with pkgs; [
