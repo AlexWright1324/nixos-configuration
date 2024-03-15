@@ -46,6 +46,8 @@
     };
   };
 
+  programs.partition-manager.enable = true;
+
   # Extra Fonts
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
