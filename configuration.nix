@@ -14,6 +14,7 @@
   # Boot Configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
+  boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems = {
     "/".options = [ "compress=zstd" ];
