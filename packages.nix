@@ -6,8 +6,12 @@
     };
   };
 
+  # Services
+  services.fwupd.enable = true;
   services.flatpak.enable = true;
+  services.printing.enable = true;
   
+  # Packages
   environment.systemPackages = with pkgs; [
     
     # CLI apps
@@ -30,7 +34,7 @@
     (discord.override { withOpenASAR = true; })
     (steam.override { extraLibraries = pkgs: [ pkgs.gperftools ]; })
   ];
-  
+
   systemd.packages = with pkgs; [
     cloudflare-warp
   ];
@@ -39,15 +43,16 @@
   #  "warp-svc.service"
   #];
 
+  # Programs Configuration
+  programs.kdeconnect.enable = true;
+  programs.partition-manager.enable = true;
+
   programs.git = {
     enable = true;
     config = {
       credential.helper = "${pkgs.git-credential-oauth}/bin/git-credential-oauth";
     };
   };
-
-  programs.partition-manager.enable = true;
-  programs.kdeconnect.enable = true;
 
   # Extra Fonts
   fonts.packages = with pkgs; [
