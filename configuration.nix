@@ -24,11 +24,16 @@
       fsType = "btrfs";
       options = [ "compress=zstd" "subvol=@share" ];
     };
+    "/mnt/StorageV3" = {
+      device = "/dev/disk/by-uuid/fbc39773-6169-48cf-a5ac-eeb9e8b8bea0";
+      fsType = "btrfs";
+      options = [ "compress=zstd" ];
+    };
   };
 
   # Nix Options
   nixpkgs.config.allowUnfree = true;
-  
+
   nix.gc.automatic = true;
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = "nix-command flakes";
