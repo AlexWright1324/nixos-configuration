@@ -28,6 +28,8 @@
 
   # Nix Options
   nixpkgs.config.allowUnfree = true;
+  
+  nix.gc.automatic = true;
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = "nix-command flakes";
 
