@@ -12,11 +12,7 @@
     
   # Nix Options
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.buildPlatform = {
-    gcc.arch = "znver3";
-    gcc.tune = "znver3";
-    system = "x86_64-linux";
-  };
+  nix.settings.system-features = lib.mkForce [ "gccarch-znver3" "benchmark" "big-parallel" "kvm" "nixos-test" ];
 
   nix.gc.automatic = true;
   nix.settings.auto-optimise-store = true;
