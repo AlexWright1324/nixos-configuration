@@ -27,7 +27,7 @@
     protonup-qt
     qt6.qtimageformats # WebP Support
     nur.repos.nltch.spotify-adblock
-    (discord.override { withOpenASAR = true; })
+    discord
     (steam.override { extraLibraries = pkgs: [ pkgs.gperftools ]; })
   ];
 
