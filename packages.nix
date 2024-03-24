@@ -6,10 +6,6 @@
     };
   };
 
-  # Services
-  services.fwupd.enable = true;
-  services.flatpak.enable = true;
-  services.printing.enable = true;
   
   # Packages
   environment.systemPackages = with pkgs; [
@@ -19,12 +15,12 @@
     vim
     htop
     wget
+    scrcpy
     neofetch
     cloudflare-warp
     git-credential-oauth
 
-    # Apps
-
+    # GUI Apps
     firefox
     stremio
     vscode.fhs
@@ -43,10 +39,19 @@
   #  "warp-svc.service"
   #];
 
+  # Services
+  services.fwupd.enable = true;
+  services.flatpak.enable = true;
+  services.printing.enable = true;
+  services.udev.packages = [
+    pkgs.android-udev-rules
+  ];
+  
   # Programs Configuration
+  programs.adb.enable = true;
   programs.kdeconnect.enable = true;
   programs.partition-manager.enable = true;
-
+  
   programs.git = {
     enable = true;
     config = {
