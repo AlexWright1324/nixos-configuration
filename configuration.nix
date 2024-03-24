@@ -12,6 +12,7 @@
     
   # Nix Options
   nixpkgs.config.allowUnfree = true;
+  nix.settings.system-features = [ "gccarch-znver3" ];
   nixpkgs.hostPlatform = {
     gcc.arch = "znver3";
     gcc.tune = "znver3";
