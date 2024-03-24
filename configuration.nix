@@ -1,21 +1,34 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix # Hardware Scan
-      ./desktop.nix                # Desktop Configuration
-      ./users.nix                  # Users configuration
-      ./packages.nix               # Packages
-      ./nix-alien.nix              # nix-alien
-      ./scripts.nix                # Import scripts folder
-    ];
+  imports = [
+    ./hardware-configuration.nix # Hardware Scan
+    ./desktop.nix                # Desktop Configuration
+    ./users.nix                  # Users configuration
+    ./packages.nix               # Packages
+    ./nix-alien.nix              # nix-alien
+    ./scripts.nix                # Import scripts folder
+  ];
+    
+  # Nix Options
+  nixpkgs.config.allowUnfree = true;
+
+  nix.gc.automatic = true;
+  nix.settings.auto-optimise-store = true;
+  nix.settings.experimental-features = "nix-command flakes";
 
   # Boot Configuration
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.loader.systemd-boot.enable = true;
+  boot.kernelParams = [
+    "pcie_aspm=off"
+    "amd_iommu=on"
+    "iommu=pt"
+    "kvm.ignore_msrs=1"
+    "kvm.report_ignored_msrs=0"
+  ];
 
+  boot.supportedFilesystems = [ "btrfs" "ntfs" ];
   fileSystems = {
     "/".options = [ "compress=zstd" ];
     "/home".options = [ "compress=zstd" ];
@@ -32,12 +45,6 @@
     };
   };
 
-  # Nix Options
-  nixpkgs.config.allowUnfree = true;
-
-  nix.gc.automatic = true;
-  nix.settings.auto-optimise-store = true;
-  nix.settings.experimental-features = "nix-command flakes";
 
   # --- System configuration ---
   time.timeZone = "Europe/London";
