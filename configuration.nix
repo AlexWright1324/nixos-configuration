@@ -12,11 +12,15 @@
     
   # Nix Options
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.hostPlatform = {
+    gcc.arch = "znver3";
+    gcc.tune = "znver3";
+    system = "x86_64-linux";
+  };
 
   nix.gc.automatic = true;
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = "nix-command flakes";
-
   # Boot Configuration
   boot.loader.efi.canTouchEfiVariables = false;
   boot.loader.systemd-boot.enable = true;
