@@ -2,8 +2,10 @@
 
 let
   nix-alien-pkgs = import (
-    builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master" ""
-  ) { };
+    builtins.fetchTarball {
+      url = "https://github.com/thiagokokada/nix-alien/tarball/master";
+      sha256 = "";
+    }) { };
 in
 {
   environment.systemPackages = with nix-alien-pkgs; [
