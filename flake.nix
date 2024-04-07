@@ -8,7 +8,7 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { nixpkgs, chaotic, nix-alien, ... }: {
+  outputs = { nixpkgs, chaotic, nix-alien, nur, ... }: {
     nixosConfigurations."Alex-PC-NixOS" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
