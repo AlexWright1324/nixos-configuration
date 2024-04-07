@@ -23,7 +23,7 @@
   boot.loader.systemd-boot.enable = true;
 
   # Kernel
-  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
   boot.kernelParams = [
     "pcie_aspm=off"
     "amd_iommu=on"
