@@ -7,14 +7,12 @@
   };
 
   outputs = { nixpkgs, chaotic, ... }: {
-    nixosConfigurations = {
-      hostname = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."Alex-PC-NixOS" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./configuration.nix # Your system configuration.
           chaotic.nixosModules.default # Chaotic Nyx
         ];
-      };
     };
   };
 }
