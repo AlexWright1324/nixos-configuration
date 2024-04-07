@@ -6,7 +6,6 @@
     ./desktop.nix                # Desktop Configuration
     ./users.nix                  # Users configuration
     ./packages.nix               # Packages
-    ./nix-alien.nix              # nix-alien
     ./scripts.nix                # Import scripts folder
   ];
     
@@ -18,7 +17,7 @@
   
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = "nix-command flakes";
-  
+
   # Boot Configuration
   boot.loader.efi.canTouchEfiVariables = false;
   boot.loader.systemd-boot.enable = true;
