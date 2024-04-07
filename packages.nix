@@ -1,13 +1,5 @@
 { config, lib, pkgs, ... }:
 {
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-      sha256 = "";
-    }) { inherit pkgs; };
-  };
-
-  
   # Packages
   environment.systemPackages = with pkgs; [
     
@@ -27,7 +19,7 @@
     vscode.fhs
     protonup-qt
     qt6.qtimageformats # WebP Support
-    nur.repos.nltch.spotify-adblock
+    config.nur.repos.nltch.spotify-adblock
     discord
     (steam.override { extraLibraries = pkgs: [ pkgs.gperftools ]; })
   ];
