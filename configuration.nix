@@ -13,12 +13,18 @@
   # Nix Options
   nixpkgs.config.allowUnfree = true;
 
-  nix.gc.automatic = true;
+  # Dev envs get deleted - bad.
+  #nix.gc.automatic = true;
+  
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = "nix-command flakes";
+  
   # Boot Configuration
   boot.loader.efi.canTouchEfiVariables = false;
   boot.loader.systemd-boot.enable = true;
+
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
   boot.kernelParams = [
     "pcie_aspm=off"
     "amd_iommu=on"
