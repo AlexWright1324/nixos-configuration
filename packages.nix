@@ -18,6 +18,7 @@
     firefox
     stremio
     vscode.fhs
+    dolphin-emu
     protonup-qt
     qt6.qtimageformats # WebP Support
     config.nur.repos.nltch.spotify-adblock

@@ -25,8 +25,8 @@
   services.xserver.enable = true;
   services.xserver.xkb.layout = "gb";
   services.desktopManager.plasma6.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.defaultSession = "plasmax11";
+  services.displayManager.sddm.enable = true;
+  services.displayManager.defaultSession = "plasmax11";
 
   # Audio
   security.rtkit.enable = true;
