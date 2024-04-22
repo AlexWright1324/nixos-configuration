@@ -2,12 +2,13 @@
 {
   # Packages
   environment.systemPackages = with pkgs; [
-    
     # CLI apps
+    scx # Kernel Scheduler
     git
     vim
     htop
     wget
+    p7zip
     scrcpy
     neofetch
     cloudflare-warp
@@ -38,6 +39,7 @@
   services.printing.enable = true;
   services.udev.packages = [
     pkgs.android-udev-rules
+    pkgs.dolphinEmu
   ];
   
   # Programs Configuration

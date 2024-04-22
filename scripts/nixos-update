@@ -6,21 +6,4 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-# Store the current commit hash
-old_commit=$(git -C /etc/nixos rev-parse HEAD)
-
-# Pull changes from the repository
-git -C /etc/nixos pull
-
-# Get the new commit hash
-new_commit=$(git -C /etc/nixos rev-parse HEAD)
-
-# Compare the old and new commit hashes
-if [ "$old_commit" != "$new_commit" ]; then
-  # If the hashes are different, it means the repository was updated
-  echo "Repository updated. Running nixos-rebuild switch..."
-  nixos-rebuild switch
-else
-  # If the hashes are the same, no updates were pulled
-  echo "No updates found in the repository."
-fi
+nixos-rebuild switch --flake github:AlexWright1324/nixos-configuration#Alex-PC-NixOS
