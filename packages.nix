@@ -20,6 +20,7 @@
     vscode.fhs
     dolphin-emu
     protonup-qt
+    qbittorrent
     qt6.qtimageformats # WebP Support
     config.nur.repos.nltch.spotify-adblock
     discord
