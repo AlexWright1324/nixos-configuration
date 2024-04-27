@@ -9,6 +9,7 @@
     htop
     wget
     p7zip
+    unrar
     scrcpy
     neofetch
     cloudflare-warp
