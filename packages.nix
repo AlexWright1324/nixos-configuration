@@ -1,10 +1,5 @@
 { config, lib, pkgs, ... }:
 {
-
-  imports = [
-    spicetify-nix.nixosModule
-  ];
-
   # Packages
   environment.systemPackages = with pkgs; [
     # CLI apps

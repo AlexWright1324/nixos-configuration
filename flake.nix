@@ -23,6 +23,7 @@
 
         inputs.chaotic.nixosModules.default # Chaotic Nyx
         inputs.nur.nixosModules.nur # NUR Repos
+        inputs.spicetify-nix.nixosModule # Spicetify
       ];
     };
   };
