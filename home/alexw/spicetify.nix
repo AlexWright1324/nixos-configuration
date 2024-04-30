@@ -1,6 +1,6 @@
-{ pkgs, lib, spicetify-nix, ... }:
+{ pkgs, lib, inputs, ... }:
 let
-  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
+  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
 in
 {
   # allow spotify to be installed if you don't have unfree enabled already
@@ -9,7 +9,7 @@ in
   ];
 
   # import the flake's module for your system
-  imports = [ spicetify-nix.nixosModule ];
+  imports = [ inputs.spicetify-nix.nixosModule ];
 
   # configure spicetify :)
   programs.spicetify =

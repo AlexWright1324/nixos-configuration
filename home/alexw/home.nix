@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   home = {
     username = "alexw";
     homeDirectory = "/home/alexw";
@@ -10,6 +10,7 @@
   };
 
   imports = [
+    inputs.spicetify-nix.nixosModule
     ./spicetify.nix
   ];
 }
