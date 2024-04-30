@@ -1,8 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
-let 
-  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
-in
 {
+  imports = [ inputs.spicetify-nix.nixosModule ];
+
   # Packages
   environment.systemPackages = with pkgs; [
     # CLI apps
@@ -59,11 +58,10 @@ in
     };
   };
 
-
-  imports = [ inputs.spicetify-nix.nixosModule ];
-
   # configure spicetify :)
-  programs.spicetify = {
+  programs.spicetify = let 
+    spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+  in {
     enable = true;
     theme = spicePkgs.themes.catppuccin;
     colorScheme = "mocha";
