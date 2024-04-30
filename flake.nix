@@ -20,8 +20,8 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./configuration.nix # Your system configuration.
-          chaotic.nixosModules.default # Chaotic Nyx
-          nur.nixosModules.nur # NUR Repos
+          inputs.chaotic.nixosModules.default # Chaotic Nyx
+          inputs.nur.nixosModules.nur # NUR Repos
           ./nix-alien.nix # Nix-alien
 
           home-manager.nixosModules.home-manager {
