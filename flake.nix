@@ -13,7 +13,6 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix # Your system configuration.
-        ./nix-alien.nix # Nix-alien
 
         inputs.chaotic.nixosModules.default # Chaotic Nyx
       ];
