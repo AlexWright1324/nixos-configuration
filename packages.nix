@@ -1,4 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
+let 
+  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
+in
 {
   # Packages
   environment.systemPackages = with pkgs; [
@@ -59,10 +62,10 @@
   # configure spicetify :)
   programs.spicetify = {
     enable = true;
-    theme = inputs.spicetify-nix.packages.${pkgs.system}.default.spicePkgs.themes.catppuccin;
+    theme = spicePkgs.themes.catppuccin;
     colorScheme = "mocha";
 
-    enabledExtensions = with inputs.spicetify-nix.packages.${pkgs.system}.default.spicePkgs.extensions; [
+    enabledExtensions = with spicePkgs.extensions; [
       fullAppDisplay
       shuffle # shuffle+ (special characters are sanitized out of ext names)
       hidePodcasts
