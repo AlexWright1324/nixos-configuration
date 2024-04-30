@@ -14,27 +14,25 @@
   };
 
   outputs = { nixpkgs, ... } @ inputs: {
-    nixosConfigurations = {
-      hostname = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./configuration.nix # Your system configuration.
-          ./nix-alien.nix # Nix-alien
+    nixosConfigurations.hostname = "Alex-PC-NixOS" {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./configuration.nix # Your system configuration.
+        ./nix-alien.nix # Nix-alien
 
-          inputs.chaotic.nixosModules.default # Chaotic Nyx
-          inputs.nur.nixosModules.nur # NUR Repos
+        inputs.chaotic.nixosModules.default # Chaotic Nyx
+        inputs.nur.nixosModules.nur # NUR Repos
 
-          inputs.home-manager.nixosModules.home-manager {
-            home-manager = {
-              extraSpecialArgs = {inherit inputs;};
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.alexw = ./home/alexw/home.nix;
-            };
-          }
-        ];
-      };
+        inputs.home-manager.nixosModules.home-manager {
+          home-manager = {
+            extraSpecialArgs = {inherit inputs;};
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.alexw = ./home/alexw/home.nix;
+          };
+        }
+      ];
     };
   };
 }
