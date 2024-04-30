@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nix-alien.url = "github:thiagokokada/nix-alien";
-    nur.url = "github:nix-community/NUR";
     spicetify-nix.url = "github:the-argus/spicetify-nix";
   };
 
@@ -18,7 +16,6 @@
         ./nix-alien.nix # Nix-alien
 
         inputs.chaotic.nixosModules.default # Chaotic Nyx
-        inputs.nur.nixosModules.nur # NUR Repos
       ];
     };
   };
