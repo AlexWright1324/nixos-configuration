@@ -23,15 +23,6 @@
 
         inputs.chaotic.nixosModules.default # Chaotic Nyx
         inputs.nur.nixosModules.nur # NUR Repos
-
-        inputs.home-manager.nixosModules.home-manager {
-          home-manager = {
-            extraSpecialArgs = {inherit inputs;};
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.alexw = ./home/alexw/home.nix;
-          };
-        }
       ];
     };
   };

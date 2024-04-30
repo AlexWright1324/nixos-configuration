@@ -1,5 +1,10 @@
 { config, lib, pkgs, ... }:
 {
+
+  imports = [
+    spicetify-nix.nixosModule
+  ];
+
   # Packages
   environment.systemPackages = with pkgs; [
     # CLI apps
@@ -23,7 +28,6 @@
     protonup-qt
     qbittorrent
     qt6.qtimageformats # WebP Support
-    config.nur.repos.nltch.spotify-adblock
     discord
     (steam.override { extraLibraries = pkgs: [ pkgs.gperftools ]; })
   ];
@@ -55,6 +59,20 @@
     config = {
       credential.helper = "${pkgs.git-credential-oauth}/bin/git-credential-oauth";
     };
+  };
+
+  # configure spicetify :)
+  programs.spicetify = {
+    enable = true;
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
+
+    enabledExtensions = with inputs.spicetify-nix.packages.${pkgs.system}.default.extensions; [
+      fullAppDisplay
+      shuffle # shuffle+ (special characters are sanitized out of ext names)
+      hidePodcasts
+      adblock
+    ];
   };
 
   # Extra Fonts
