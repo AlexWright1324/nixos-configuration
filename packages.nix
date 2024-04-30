@@ -60,7 +60,7 @@ in
   };
 
 
-  imports = [ inputs.spicetify-nix.homeManagerModule ];
+  imports = [ inputs.spicetify-nix.nixosModule ];
 
   # configure spicetify :)
   programs.spicetify = {
