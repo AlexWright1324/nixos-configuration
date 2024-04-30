@@ -59,7 +59,7 @@
   # configure spicetify :)
   programs.spicetify = {
     enable = true;
-    theme = spicePkgs.themes.catppuccin;
+    theme = inputs.spicetify-nix.packages.${pkgs.system}.default.themes.catppuccin;
     colorScheme = "mocha";
 
     enabledExtensions = with inputs.spicetify-nix.packages.${pkgs.system}.default.extensions; [
