@@ -59,6 +59,9 @@ in
     };
   };
 
+
+  imports = [ spicetify-nix.homeManagerModule ];
+  
   # configure spicetify :)
   programs.spicetify = {
     enable = true;
