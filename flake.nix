@@ -20,11 +20,12 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./configuration.nix # Your system configuration.
-          inputs.chaotic.nixosModules.default # Chaotic Nyx
-          inputs.nur.nixosModules.nur # NUR Repos
           ./nix-alien.nix # Nix-alien
 
-          home-manager.nixosModules.home-manager {
+          inputs.chaotic.nixosModules.default # Chaotic Nyx
+          inputs.nur.nixosModules.nur # NUR Repos
+          
+          inputshome-manager.nixosModules.home-manager {
             home-manager = {
               extraSpecialArgs = {inherit inputs;};
               useGlobalPkgs = true;
