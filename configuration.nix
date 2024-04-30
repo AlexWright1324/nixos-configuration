@@ -25,12 +25,14 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
   boot.kernelParams = [
-    "pcie_aspm=off"
     "amd_iommu=on"
     "iommu=pt"
     "kvm.ignore_msrs=1"
     "kvm.report_ignored_msrs=0"
   ];
+  boot.extraModprobeConfig = ''
+    options rtl8821ae ips=0 msi=0 aspm=0
+  '';
 
   boot.supportedFilesystems = [ "btrfs" "ntfs" ];
   fileSystems = {
