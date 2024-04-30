@@ -6,4 +6,4 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-nixos-rebuild switch --flake github:AlexWright1324/nixos-configuration#Alex-PC-NixOS --no-write-lock-file
+nixos-rebuild switch --flake github:AlexWright1324/nixos-configuration#Alex-PC-NixOS --no-write-lock-file --refresh
