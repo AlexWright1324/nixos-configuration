@@ -1,6 +1,6 @@
 { config, lib, pkgs, inputs, ... }:
 let 
-  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
+  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
 in
 {
   # Packages
