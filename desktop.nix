@@ -1,6 +1,13 @@
 { config, lib, pkgs, ... }:
 
 {
+  # AMD
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+
+
   # Nvidia
   hardware.nvidia = {
     open = false;
@@ -10,20 +17,27 @@
     powerManagement.finegrained = false;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
     extraPackages = with pkgs; [
-      vaapiVdpau
+      vaapiVdpau # Remove
+      rocmPackages.clr.icd
+      amdvlk
+    ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
     ];
   };
 
   # X-Server
-  services.xserver.enable = true;
-  services.xserver.xkb.layout = "gb";
+  services.xserver = {
+    enable = true;
+    xkb.layout = "gb";
+    videoDrivers = [ "nvidia" "amdgpu" ];
+  };
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.defaultSession = "plasmax11";
