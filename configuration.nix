@@ -47,7 +47,7 @@
     "/mnt/StorageV3" = {
       device = "/dev/disk/by-uuid/fbc39773-6169-48cf-a5ac-eeb9e8b8bea0";
       fsType = "btrfs";
-      options = [ "compress=zstd" ];
+      options = [ "compress=zstd" "nofail" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
     };
   };
 

@@ -7,23 +7,11 @@
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 
-
-  # Nvidia
-  hardware.nvidia = {
-    open = false;
-    nvidiaSettings = true;
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
     extraPackages = with pkgs; [
-      vaapiVdpau # Remove
       rocmPackages.clr.icd
       amdvlk
     ];
@@ -36,11 +24,11 @@
   services.xserver = {
     enable = true;
     xkb.layout = "gb";
-    videoDrivers = [ "nvidia" "amdgpu" ];
+    videoDrivers = [ "amdgpu" ];
   };
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
-  services.displayManager.defaultSession = "plasmax11";
+  services.displayManager.defaultSession = "plasma";
 
   # Audio
   security.rtkit.enable = true;
