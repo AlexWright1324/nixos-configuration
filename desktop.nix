@@ -25,10 +25,12 @@
     enable = true;
     xkb.layout = "gb";
     videoDrivers = [ "amdgpu" ];
+    displayManager.sddm.wayland.enable = true;
   };
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.defaultSession = "plasma";
+  programs.dconf.enable = true;
 
   # Audio
   security.rtkit.enable = true;
