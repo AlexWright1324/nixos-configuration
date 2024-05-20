@@ -25,12 +25,13 @@
     enable = true;
     xkb.layout = "gb";
     videoDrivers = [ "amdgpu" ];
-    displayManager.sddm.wayland.enable = true;
+  };
+  services.displayManager = {
+    sddm.enable = true;
+    sddm.wayland.enable = true;
+    defaultSession = "plasma";
   };
   services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.defaultSession = "plasma";
-  programs.dconf.enable = true;
 
   # Audio
   security.rtkit.enable = true;
@@ -47,4 +48,5 @@
   # Plasma Configuration
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.libsForQt5.xdg-desktop-portal-kde ];
+  programs.dconf.enable = true;
 }
