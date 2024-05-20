@@ -18,15 +18,15 @@
     git-credential-oauth
 
     # GUI Apps
+    discord
     firefox
     stremio
+    mangohud
     vscode.fhs
     dolphin-emu
     protonup-qt
     qbittorrent
     qt6.qtimageformats # WebP Support
-    discord
-    (steam.override { extraLibraries = pkgs: [ pkgs.gperftools ]; })
   ];
 
   systemd.packages = with pkgs; [
@@ -50,6 +50,14 @@
   programs.adb.enable = true;
   programs.kdeconnect.enable = true;
   programs.partition-manager.enable = true;
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: [ gperftools ];
+    };
+    gamescopeSession.enable = true;
+  };
+
   
   programs.git = {
     enable = true;
