@@ -67,6 +67,12 @@
   # ZRAM generator
   zramSwap.enable = true;
 
+  # Limits.conf
+  security.pam.loginLimits = [
+    { domain = "*"; item = "nofile"; type = "hard"; value = "65535"; }
+    { domain = "*"; item = "nofile"; type = "soft"; value = "8192"; }
+  ];
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
