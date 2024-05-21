@@ -53,7 +53,7 @@
   programs.steam = {
     enable = true;
     package = pkgs.steam.override {
-      extraPkgs = pkgs: [ gperftools ];
+      extraPkgs = pkgs: [ pkgs.gperftools ];
     };
     gamescopeSession.enable = true;
   };
