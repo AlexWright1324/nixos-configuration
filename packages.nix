@@ -49,6 +49,10 @@
     pkgs.android-udev-rules
     pkgs.dolphinEmu
   ];
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
   
   # Programs Configuration
   programs.adb.enable = true;
