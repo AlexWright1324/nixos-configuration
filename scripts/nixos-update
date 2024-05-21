@@ -6,4 +6,12 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-nixos-rebuild switch --flake github:AlexWright1324/nixos-configuration#Alex-PC-NixOS --no-write-lock-file --refresh
+cd /etc/nixos
+
+git fetch origin
+git checkout main
+git reset --hard origin/main
+git clean -f -d
+
+nix flake update
+nixos-rebuild switch --flake .#Alex-PC-NixOS --refresh
