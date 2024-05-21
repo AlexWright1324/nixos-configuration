@@ -14,4 +14,4 @@ git reset --hard origin/main
 git clean -f -d
 
 nix flake update
-nixos-rebuild switch --flake .#Alex-PC-NixOS --refresh
+nixos-rebuild switch --flake .#Alex-PC-NixOS
