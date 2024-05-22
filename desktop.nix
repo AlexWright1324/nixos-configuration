@@ -46,6 +46,12 @@
   hardware.bluetooth.enable = true;
 
   # Plasma Configuration
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.libsForQt5.xdg-desktop-portal-kde ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-kde
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
+  };
 }
