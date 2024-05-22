@@ -48,5 +48,4 @@
   # Plasma Configuration
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.libsForQt5.xdg-desktop-portal-kde ];
-  programs.dconf.enable = true;
 }
