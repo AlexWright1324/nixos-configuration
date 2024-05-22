@@ -91,7 +91,11 @@
   };
 
   # Extra Fonts
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  ];
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    ];
+  };
+  fonts.
 }
