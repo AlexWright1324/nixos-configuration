@@ -97,5 +97,4 @@
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
   };
-  fonts.
 }
