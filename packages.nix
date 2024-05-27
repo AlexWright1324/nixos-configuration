@@ -56,6 +56,7 @@
   
   # Programs Configuration
   programs.adb.enable = true;
+  programs.direnv.enable = true;
   programs.kdeconnect.enable = true;
   programs.partition-manager.enable = true;
   programs.steam = {

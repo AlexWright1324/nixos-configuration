@@ -33,7 +33,6 @@
   boot.extraModprobeConfig = ''
     options rtl8821ae ips=0 msi=0 aspm=0
   '';
-  hardware.cpu.amd.updateMicrocode = true;
 
   boot.supportedFilesystems = [ "btrfs" "ntfs" ];
   fileSystems = {
