@@ -33,14 +33,6 @@
   };
   services.desktopManager.plasma6.enable = true;
 
-  # Audio
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -53,5 +45,26 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
     ];
+  };
+
+  # Audio
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    extraConfig.pipewire."91-surround-fix" = {
+      context.modules = [
+          { name = "libpipewire-module-alsa-sink";
+            args = {
+              node.name = "alsa_output";
+              node.description = "5.1 Surround Output Without Rear Channels";
+              media.class = "Audio/Sink";
+              audio.position = "FL,FR,FC,LFE,FL,FR";
+            };
+          }
+      ]
+    };
   };
 }

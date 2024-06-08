@@ -14,6 +14,7 @@
     unrar
     scrcpy
     neofetch
+    alsa-tools
     cloudflare-warp
     git-credential-oauth
 
