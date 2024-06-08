@@ -58,7 +58,7 @@
       context.modules = [
           { name = "libpipewire-module-alsa-sink";
             args = {
-              node.name = "alsa_output";
+              node.name = "alsa_output.pci-0000_0b_00.4.analog-surround-51";
               node.description = "5.1 Surround Output Without Rear Channels";
               media.class = "Audio/Sink";
               audio.position = "FL,FR,FC,LFE,FL,FR";
