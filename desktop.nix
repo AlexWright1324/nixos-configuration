@@ -64,7 +64,7 @@
               audio.position = "FL,FR,FC,LFE,FL,FR";
             };
           }
-      ]
+      ];
     };
   };
 }
