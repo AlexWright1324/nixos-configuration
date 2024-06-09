@@ -56,7 +56,7 @@
     pulse.enable = true;
     wireplumber.extraConfig = {
       alsa_monitor.rules = {
-        matches = {{{ "node.name" "matches" "alsa_output.pci-0000_0b_00.4.analog-surround-51" }}};
+        matches = [{ "node.name" "matches" "alsa_output.pci-0000_0b_00.4.analog-surround-51" }];
         apply_properties = {
           ["audio.positions"] = "FL,FR,FL,FR,FC,LFE";
         };
