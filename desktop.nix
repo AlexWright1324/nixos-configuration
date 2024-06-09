@@ -55,7 +55,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     extraConfig.pipewire."99-surround" = {
-      "context.modules" = {
+      "context.modules" = [{
         name = "libpipewire-module-loopback";
         args = {
             audio.position = [ "FL" "FR" "FL" "FR" "FC" "LFE" ];
@@ -73,7 +73,7 @@
               node.target = "alsa_output.pci-0000_0b_00.4.analog-surround-51";
             };
         };
-      };
+      }];
     };
   };
 }
