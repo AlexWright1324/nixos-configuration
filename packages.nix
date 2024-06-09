@@ -25,9 +25,9 @@
     mangohud
     vscode.fhs
     dolphin-emu
-    protonup-qt
     qbittorrent
     qt6.qtimageformats # WebP Support
+    kdePackages.discover
   ];
 
   environment.sessionVariables =  {
