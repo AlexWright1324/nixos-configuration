@@ -55,7 +55,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.extraConfig."99-surround" = {
-      "monitor.alsa.rules" = {
+      "monitor.alsa.rules" = [{
         matches = [{ 
           "device.name" = "alsa_output.pci-0000_0b_00.4.analog-surround-51" ;
         }];
@@ -64,7 +64,7 @@
             "audio.positions" = "FL,FR,FL,FR,FC,LFE";
           };
         };
-      };
-    };
+      }];
+    }
   };
 }
