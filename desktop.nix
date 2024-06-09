@@ -58,21 +58,21 @@
       "context.modules" = {
         name = "libpipewire-module-loopback";
         args = {
-            audio.position = [ FL FR FL FR FC LFE ]
+            audio.position = [ FL FR FL FR FC LFE ];
             capture.props = {
-                media.class = Audio/Sink
-                node.name = "5.1_remap_c"
-                node.description = "Creative 5.1 Remapped Input"
+                media.class = "Audio/Sink";
+                node.name = "5.1_remap_c";
+                node.description = "Creative 5.1 Remapped Input";
 
-            }
+            };
 
             playback.props = {
-              node.name = "5.1_remap_p"
-              node.description = "5.1 Remapped Output"
-              audio.position = [ FL FR RL RR FC LFE ]
-              node.target = "alsa_output.pci-0000_0b_00.4.analog-surround-51"
-            }
-        }
+              node.name = "5.1_remap_p";
+              node.description = "5.1 Remapped Output";
+              audio.position = [ FL FR RL RR FC LFE ];
+              node.target = "alsa_output.pci-0000_0b_00.4.analog-surround-51";
+            };
+        };
       };
     };
   };
