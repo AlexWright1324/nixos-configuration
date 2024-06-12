@@ -22,6 +22,7 @@
     discord
     firefox
     stremio
+    droidcam
     mangohud
     vscode.fhs
     dolphin-emu
