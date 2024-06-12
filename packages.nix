@@ -16,7 +16,7 @@
     neofetch
     alsa-tools
     podman-tui
-    docker-compose
+    podman-compose
     cloudflare-warp
     git-credential-oauth
 
@@ -104,8 +104,8 @@
   };
 
   # Podman
-  virtualisation.containers.enable = true;
   virtualisation = {
+    containers.enable = true;
     podman = {
       enable = true;
 
