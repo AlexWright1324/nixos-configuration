@@ -17,7 +17,7 @@
     alsa-tools
     podman-tui
     podman-compose
-    cloudflare-warp
+    #cloudflare-warp
     git-credential-oauth
 
     # GUI Apps
@@ -37,9 +37,9 @@
     MANGOHUD = "1";
   };
 
-  systemd.packages = with pkgs; [
-    cloudflare-warp
-  ];
+  #systemd.packages = with pkgs; [
+  #  cloudflare-warp
+  #];
   
   #systemd.targets.multi-user.wants = [
   #  "warp-svc.service"
