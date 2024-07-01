@@ -115,6 +115,7 @@
     };
     docker = {
       enable = true;
+      enableOnBoot = false;
     };
   };
 }
