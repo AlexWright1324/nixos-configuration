@@ -21,6 +21,9 @@
   # Boot Configuration
   boot.loader.efi.canTouchEfiVariables = false;
   boot.loader.systemd-boot.enable = true;
+  
+  # Proper ordering
+  boot.initrd.systemd.services.systemd-udevd.after = [ "systemd-modules-load.service" ];
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
