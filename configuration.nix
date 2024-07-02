@@ -63,9 +63,17 @@
   };
 
   # Networking
-  networking.hostName = "Alex-PC-NixOS";
-  networking.networkmanager.enable = true;
-  networking.firewall.enable = false;
+  networking = {
+    hostName = "Alex-PC-NixOS";
+    networkmanager.enable = true;
+    firewall.enable = false;
+
+    # Speed Booting
+    dhcpcd = {
+      wait = "background";
+      extraConfig = "noarp";
+    };
+  };
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # ZRAM generator
