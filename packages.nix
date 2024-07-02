@@ -22,14 +22,10 @@
     git-credential-oauth
 
     # GUI Apps
-    discord
     firefox
-    stremio
     droidcam
     mangohud
     vscode.fhs
-    dolphin-emu
-    qbittorrent
     qt6.qtimageformats # WebP Support
     kdePackages.discover
   ];
