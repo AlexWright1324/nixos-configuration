@@ -8,7 +8,12 @@
     ./packages.nix               # Packages
     ./scripts.nix                # Import scripts folder
   ];
-    
+  # TEMP
+  nixpkgs.overlays = [
+    (_: prev: {
+        python312 = prev.python312.override { packageOverrides = _: pysuper: { nose = pysuper.pynose; }; };
+    })
+  ];
   # Nix Options
   nixpkgs.config.allowUnfree = true;
 
