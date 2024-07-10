@@ -8,12 +8,7 @@
     ./packages.nix               # Packages
     ./scripts.nix                # Import scripts folder
   ];
-  # TEMP Fix for https://discourse.nixos.org/t/error-nose-1-3-7-not-supported-for-interpreter-python3-12/48703/15
-  nixpkgs.overlays = [
-    (_: prev: {
-        python312 = prev.python312.override { packageOverrides = _: pysuper: { nose = pysuper.pynose; }; };
-    })
-  ];
+  
   # Nix Options
   nixpkgs.config.allowUnfree = true;
 

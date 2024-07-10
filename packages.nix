@@ -60,6 +60,7 @@
   programs.adb.enable = true;
   programs.direnv.enable = true;
   programs.kdeconnect.enable = true;
+  programs.virt-manager.enable = true;
   programs.partition-manager.enable = true;
   programs.steam = {
     enable = true;
@@ -103,6 +104,7 @@
 
   # Podman
   virtualisation = {
+    libvirtd.enable = true;
     containers.enable = true;
     podman = {
       enable = true;
