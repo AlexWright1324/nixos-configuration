@@ -22,7 +22,7 @@
     defaultSession = "plasma";
   };
   services.desktopManager.plasma6.enable = true;
-
+  
 
   # Bluetooth
   hardware.bluetooth.enable = true;

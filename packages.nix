@@ -43,6 +43,7 @@
   #];
 
   # Services
+  services.tailscale.enable = true;
   services.fwupd.enable = true;
   services.flatpak.enable = true;
   services.printing.enable = true;
