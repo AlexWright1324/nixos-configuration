@@ -1,10 +1,12 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 {
-  imports = [ inputs.spicetify-nix.nixosModule ];
+  imports = [
+    ./packages/droidcam.nix
+    # ./packages/cloudflareWarp.nix
+  ];
 
-  # Packages
   environment.systemPackages = with pkgs; [
-    # CLI apps
+    # CLI
     scx # Kernel Scheduler
     git
     vim
@@ -12,45 +14,20 @@
     wget
     p7zip
     unrar
-    scrcpy
-    neofetch
-    alsa-tools
-    podman-tui
-    podman-compose
     docker-compose
-    #cloudflare-warp
     git-credential-oauth
-
-    # GUI Apps
-    firefox
-    droidcam
-    mangohud
-    vscode.fhs
-    qt6.qtimageformats # WebP Support
-    kdePackages.discover
   ];
-
-  environment.sessionVariables =  {
-    MANGOHUD = "1";
-  };
-
-  #systemd.packages = with pkgs; [
-  #  cloudflare-warp
-  #];
-  
-  #systemd.targets.multi-user.wants = [
-  #  "warp-svc.service"
-  #];
 
   # Services
   services.tailscale.enable = true;
   services.fwupd.enable = true;
   services.flatpak.enable = true;
   services.printing.enable = true;
+
   services.udev.packages = [
     pkgs.android-udev-rules
-    pkgs.dolphinEmu
   ];
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -58,10 +35,9 @@
   
   # Programs Configuration
   programs.adb.enable = true;
-  programs.direnv.enable = true;
-  programs.kdeconnect.enable = true;
   programs.virt-manager.enable = true;
   programs.partition-manager.enable = true;
+
   programs.steam = {
     enable = true;
     package = pkgs.steam.override {
@@ -70,7 +46,6 @@
     gamescopeSession.enable = true;
   };
 
-  
   programs.git = {
     enable = true;
     config = {
@@ -78,23 +53,6 @@
     };
   };
 
-  # configure spicetify :)
-  programs.spicetify = let 
-    spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
-  in {
-    enable = true;
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "mocha";
-
-    enabledExtensions = with spicePkgs.extensions; [
-      fullAppDisplay
-      shuffle # shuffle+ (special characters are sanitized out of ext names)
-      hidePodcasts
-      adblock
-    ];
-  };
-
-  # Extra Fonts
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
@@ -102,19 +60,13 @@
     ];
   };
 
-  # Podman
   virtualisation = {
     libvirtd.enable = true;
     containers.enable = true;
     podman = {
       enable = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
+      dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
-    };
-    docker = {
-      enable = true;
-      enableOnBoot = false;
     };
   };
 }

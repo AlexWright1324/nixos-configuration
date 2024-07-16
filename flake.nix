@@ -1,10 +1,18 @@
 {
-  description = "System Configuration";
+  description = "Alex's NixOS System Configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    spicetify-nix.url = "github:the-argus/spicetify-nix";
+    spicetify-nix = {
+      # the-argus/spicetify-nix
+      url = "github:K900/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, ... } @ inputs: {
@@ -12,9 +20,17 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
-        ./configuration.nix # Your system configuration.
+        ./config.nix
 
         inputs.chaotic.nixosModules.default # Chaotic Nyx
+
+        inputs.home-manager.nixosModules.home-manager {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = {inherit inputs;};
+          };
+        }
       ];
     };
   };

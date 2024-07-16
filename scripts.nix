@@ -1,7 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
-  # Define the directory where your scripts are located
   scriptsDir = ./scripts;
 
   regularFiles = builtins.attrNames (builtins.readDir scriptsDir);

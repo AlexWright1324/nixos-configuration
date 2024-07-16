@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # AMD
@@ -16,18 +16,21 @@
     xkb.layout = "gb";
     videoDrivers = [ "amdgpu" ];
   };
+
   services.displayManager = {
     sddm.enable = true;
     sddm.wayland.enable = true;
     defaultSession = "plasma";
   };
-  services.desktopManager.plasma6.enable = true;
-  
 
   # Bluetooth
   hardware.bluetooth.enable = true;
 
-  # Plasma Configuration
+  # Plasma
+  environment.systemPackages = with pkgs; [
+    qt6.qtimageformats # WebP Support
+  ];
+  services.desktopManager.plasma6.enable = true;
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
