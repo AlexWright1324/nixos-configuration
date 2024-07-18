@@ -8,48 +8,58 @@
   environment.systemPackages = with pkgs; [
     # CLI
     scx # Kernel Scheduler
-    git
     vim
     htop
     wget
     p7zip
     unrar
+    lact
     docker-compose
     git-credential-oauth
   ];
 
-  # Services
-  services.tailscale.enable = true;
-  services.fwupd.enable = true;
-  services.flatpak.enable = true;
-  services.printing.enable = true;
-
-  services.udev.packages = [
-    pkgs.android-udev-rules
-  ];
-
-  services.avahi = {
+  systemd.services.lact = {
     enable = true;
-    nssmdns4 = true;
+    description = "AMDGPU Control Daemon";
+    after = ["multi-user.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.lact}/bin/lact daemon";
+    };
+  };
+
+  services = {
+    tailscale.enable = true;
+    fwupd.enable = true;
+    flatpak.enable = true;
+    printing.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+    };
+    udev.packages = [
+      pkgs.android-udev-rules
+    ];
   };
   
-  # Programs Configuration
-  programs.adb.enable = true;
-  programs.virt-manager.enable = true;
-  programs.partition-manager.enable = true;
+  programs = {
+    adb.enable = true;
+    virt-manager.enable = true;
+    partition-manager.enable = true;
 
-  programs.steam = {
-    enable = true;
-    package = pkgs.steam.override {
-      extraPkgs = pkgs: [ pkgs.gperftools ];
+    steam = {
+      enable = true;
+      package = pkgs.steam.override {
+        extraPkgs = pkgs: [ pkgs.gperftools ];
+      };
+      gamescopeSession.enable = true;
     };
-    gamescopeSession.enable = true;
-  };
 
-  programs.git = {
-    enable = true;
-    config = {
-      credential.helper = "${pkgs.git-credential-oauth}/bin/git-credential-oauth";
+    git = {
+      enable = true;
+      config = {
+        credential.helper = "${pkgs.git-credential-oauth}/bin/git-credential-oauth";
+      };
     };
   };
 
