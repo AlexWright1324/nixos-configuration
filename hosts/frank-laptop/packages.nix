@@ -1,0 +1,32 @@
+{ config, pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    # CLI
+    git
+    htop
+    wget
+    p7zip
+    unrar
+  ];
+
+  services = {
+    fwupd.enable = true;
+    flatpak.enable = true;
+    printing.enable = true;
+    udev.packages = [
+      pkgs.android-udev-rules
+    ];
+  };
+  
+  programs = {
+    adb.enable = true;
+    partition-manager.enable = true;
+  };
+
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    ];
+  };
+}

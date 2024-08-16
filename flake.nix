@@ -16,22 +16,33 @@
   };
 
   outputs = { nixpkgs, ... } @ inputs: {
-    nixosConfigurations."Alex-PC-NixOS" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./config.nix
+    nixosConfigurations = {
+      "Alex-PC-NixOS" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./config.nix
 
-        inputs.chaotic.nixosModules.default # Chaotic Nyx
+          inputs.chaotic.nixosModules.default # Chaotic Nyx
 
-        inputs.home-manager.nixosModules.home-manager {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = {inherit inputs;};
-          };
-        }
-      ];
+          inputs.home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs;};
+            };
+          }
+        ];
+      };
+      "Frank-Laptop-NixOS" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/frank-laptop
+
+          inputs.chaotic.nixosModules.default # Chaotic Nyx
+        ];
+      };
     };
   };
 }
