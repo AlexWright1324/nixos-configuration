@@ -10,6 +10,7 @@
   ];
 
   services = {
+    openssh.enable = true;
     fwupd.enable = true;
     flatpak.enable = true;
     printing.enable = true;
@@ -21,6 +22,11 @@
   programs = {
     adb.enable = true;
     partition-manager.enable = true;
+    firefox.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
   };
 
   fonts = {
@@ -30,3 +36,4 @@
     ];
   };
 }
+

@@ -1,7 +1,7 @@
 {
   fileSystems = let 
-    device = "/dev/disk/by-uuid/aad5f079-9fec-46b4-9c83-72c125f266fa";
-    efiDevice = "/dev/disk/by-uuid/4D2C-9454";
+    device = "/dev/disk/by-uuid/6f17ed96-4fd5-4eb6-aff7-dbfc886f4949";
+    efiDevice = "/dev/disk/by-uuid/067B-1A09";
   in {
     # Main Drive
     "/" = {
@@ -22,8 +22,15 @@
     "/boot" = { 
       device = efiDevice;
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+    
+    # Others
+    "/mnt/old-home" = {
+      inherit device;
+      fsType = "btrfs";
+      options = [ "subvol=@home" "compress=zstd" ];
     };
 
-    # Others
   };
 }

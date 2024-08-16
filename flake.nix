@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix = {
       # the-argus/spicetify-nix
       url = "github:K900/spicetify-nix";
@@ -15,7 +19,7 @@
     };
   };
 
-  outputs = { nixpkgs, ... } @ inputs: {
+  outputs = { self, nixpkgs, ... } @ inputs: {
     nixosConfigurations = {
       "Alex-PC-NixOS" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -39,9 +43,19 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/frank-laptop
-
-          inputs.chaotic.nixosModules.default # Chaotic Nyx
         ];
+      };
+    };
+
+    deploy.nodes."Frank-Laptop-NixOS" = {
+      hostname = "192.168.1.235";
+      
+      interactiveSudo = true;
+      remoteBuild = true;
+
+      profiles.system = {
+        user = "root";
+        path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."Frank-Laptop-NixOS";
       };
     };
   };

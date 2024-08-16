@@ -18,6 +18,8 @@
   # Plasma
   environment.systemPackages = with pkgs; [
     qt6.qtimageformats # WebP Support
+    kdePackages.krfb
+    kdePackages.k3b
   ];
   services.desktopManager.plasma6.enable = true;
   xdg.portal = {

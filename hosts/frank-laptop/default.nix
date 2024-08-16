@@ -7,6 +7,7 @@
     ./packages.nix          # Packages
     ./users.nix             # Users configuration
     ../../modules/fastBoot.nix  # Fast Boot
+    ../../packages/lact.nix
   ];
   
   nixpkgs = {
@@ -24,12 +25,13 @@
       systemd-boot.enable = true;
     };
 
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    #kernelPackages = pkgs.linuxPackages_cachyos;
     supportedFilesystems = [ "btrfs" "ntfs" ];
     kernelModules = [ "kvm-amd" ];
     kernelParams = [ "amd_iommu=on" "iommu=pt" ];
     
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" ];
+    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ums_realtek" "usb_storage" "usbhid" ];
+
   };
   
   hardware.enableAllFirmware = true;
@@ -40,6 +42,7 @@
   console.keyMap = "uk";
 
   networking = {
+    hostName = "Frank-Laptop-NixOS";
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
     firewall.enable = false;
