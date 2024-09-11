@@ -10,6 +10,7 @@
   ];
 
   services = {
+    openssh.enable = true;
     fwupd.enable = true;
     flatpak.enable = true;
     printing.enable = true;

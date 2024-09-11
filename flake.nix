@@ -39,8 +39,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/frank-laptop
-
-          inputs.chaotic.nixosModules.default # Chaotic Nyx
         ];
       };
     };
