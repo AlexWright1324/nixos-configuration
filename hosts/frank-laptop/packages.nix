@@ -22,6 +22,11 @@
   programs = {
     adb.enable = true;
     partition-manager.enable = true;
+    firefox.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
   };
 
   fonts = {
@@ -31,3 +36,4 @@
     ];
   };
 }
+

@@ -7,6 +7,7 @@
     ./packages.nix          # Packages
     ./users.nix             # Users configuration
     ../../modules/fastBoot.nix  # Fast Boot
+    ../../packages/lact.nix
   ];
   
   nixpkgs = {

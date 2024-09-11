@@ -23,8 +23,17 @@
       device = efiDevice;
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
+<<<<<<< HEAD
+=======
+    };
+    
+    # Others
+    "/mnt/old-home" = {
+      inherit device;
+      fsType = "btrfs";
+      options = [ "subvol=@home" "compress=zstd" ];
+>>>>>>> 5681bf0e647818be3e3789bfdc4c5a8a7bc4379f
     };
 
-    # Others
   };
 }
