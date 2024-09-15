@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./packages/droidcam.nix
+    ../../packages/droidcam.nix
     # ./packages/cloudflareWarp.nix
   ];
 

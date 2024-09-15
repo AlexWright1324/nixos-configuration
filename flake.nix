@@ -25,7 +25,7 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
-          ./config.nix
+          ./hosts/alex-pc
 
           inputs.chaotic.nixosModules.default # Chaotic Nyx
 

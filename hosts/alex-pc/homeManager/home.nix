@@ -16,6 +16,9 @@
       alsa-tools
       mangohud
       kdePackages.discover
+      kdePackages.kontact
+      kdePackages.kdepim-addons
+      kdePackages.kmail-account-wizard
     ];
     
     sessionVariables =  {
@@ -31,9 +34,6 @@
   };
 
   programs = {
-    firefox = {
-      enable = true;
-    };
     vscode = {
       enable = true;
       package = pkgs.vscode.fhsWithPackages (ps: with ps; [

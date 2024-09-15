@@ -7,7 +7,7 @@
     ./users.nix             # Users configuration
     ./packages.nix          # Packages
     ./scripts.nix           # Import scripts folder
-    ./modules/fastBoot.nix  # Fast Boot
+    ../../modules/fastBoot.nix  # Fast Boot
   ];
   
   nixpkgs = {
