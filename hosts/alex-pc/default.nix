@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, chaotic, ... }:
 
 {
   imports = [
@@ -41,6 +41,9 @@
     
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" ];
   };
+
+  chaotic.scx.enable = true;
+  chaotic.scx.scheduler = "scx_bpfland";
   
   hardware.enableAllFirmware = true;
 

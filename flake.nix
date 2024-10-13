@@ -9,8 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
-      # the-argus/spicetify-nix
-      url = "github:K900/spicetify-nix";
+      url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
