@@ -23,6 +23,8 @@
     defaultSession = "plasma";
   };
 
+  services.dbus.implementation = "broker";
+
   # Bluetooth
   hardware.bluetooth.enable = true;
 
@@ -47,5 +49,14 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    extraConfig.pipewire."92-low-latency" = {
+      "context.properties" = {
+        "link.max-buffers" = 128;
+        "default.clock.rate" = 48000;
+        "default.clock.quantum" = 2048;
+        "default.clock.min-quantum" = 1024;
+        "default.clock.max-quantum" = 4096;
+      };
+    };
   };
 }

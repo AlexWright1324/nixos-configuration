@@ -1,15 +1,15 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 
 {
   imports = [
-    ./desktop.nix           # Desktop Configuration
-    ./filesystem.nix        # Filesystem Configuration
-    ./packages.nix          # Packages
-    ./users.nix             # Users configuration
-    ../../modules/fastBoot.nix  # Fast Boot
+    ./desktop.nix # Desktop Configuration
+    ./filesystem.nix # Filesystem Configuration
+    ./packages.nix # Packages
+    ./users.nix # Users configuration
+    ../../modules/fastBoot.nix # Fast Boot
     ../../packages/lact.nix
   ];
-  
+
   nixpkgs = {
     config.allowUnfree = true;
   };
@@ -26,14 +26,26 @@
     };
 
     #kernelPackages = pkgs.linuxPackages_cachyos;
-    supportedFilesystems = [ "btrfs" "ntfs" ];
+    supportedFilesystems = [
+      "btrfs"
+      "ntfs"
+    ];
     kernelModules = [ "kvm-amd" ];
-    kernelParams = [ "amd_iommu=on" "iommu=pt" ];
-    
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ums_realtek" "usb_storage" "usbhid" ];
+    kernelParams = [
+      "amd_iommu=on"
+      "iommu=pt"
+    ];
+
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ums_realtek"
+      "usb_storage"
+      "usbhid"
+    ];
 
   };
-  
+
   hardware.enableAllFirmware = true;
 
   # Localisation
@@ -53,11 +65,20 @@
 
   # Limits.conf
   security.pam.loginLimits = [
-    { domain = "*"; item = "nofile"; type = "hard"; value = "65535"; }
-    { domain = "*"; item = "nofile"; type = "soft"; value = "8192"; }
+    {
+      domain = "*";
+      item = "nofile";
+      type = "hard";
+      value = "65535";
+    }
+    {
+      domain = "*";
+      item = "nofile";
+      type = "soft";
+      value = "8192";
+    }
   ];
 
   # DO NOT EDIT
   system.stateVersion = "23.11";
 }
-

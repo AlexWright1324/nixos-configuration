@@ -16,46 +16,52 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
 
-  outputs = { self, nixpkgs, ... } @ inputs: {
-    nixosConfigurations = {
-      "Alex-PC-NixOS" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/alex-pc
-
-          inputs.chaotic.nixosModules.default # Chaotic Nyx
-
-          inputs.home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs;};
-            };
-          }
-        ];
-      };
-      "Frank-Laptop-NixOS" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/frank-laptop
-        ];
-      };
+    # Development tooling
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
+    pre-commit-hooks-nix = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs.nixpkgs.follows = "";
     };
 
-    deploy.nodes."Frank-Laptop-NixOS" = {
-      hostname = "192.168.1.235";
-      
-      interactiveSudo = true;
-      remoteBuild = true;
-
-      profiles.system = {
-        user = "root";
-        path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."Frank-Laptop-NixOS";
-      };
-    };
+    systems.url = "github:nix-systems/default";
   };
+
+  outputs =
+    { self, ... }@inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.pre-commit-hooks-nix.flakeModule
+        ./hosts
+      ];
+
+      flake = {
+        checks = builtins.mapAttrs (
+          system: deployLib: deployLib.deployChecks self.deploy
+        ) inputs.deploy-rs.lib;
+      };
+
+      systems = import inputs.systems;
+
+      # Development Environment
+      perSystem =
+        { config, pkgs, ... }:
+        {
+          pre-commit.settings.hooks = {
+            nil.enable = true;
+            nixfmt-rfc-style.enable = true;
+          };
+
+          devShells.default = pkgs.mkShell {
+            inputsFrom = [
+              config.pre-commit.devShell
+            ];
+            packages = with pkgs; [ deploy-rs ];
+          };
+
+          formatter = pkgs.nixfmt-rfc-style;
+        };
+    };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # CLI
@@ -18,7 +18,7 @@
       pkgs.android-udev-rules
     ];
   };
-  
+
   programs = {
     adb.enable = true;
     partition-manager.enable = true;
@@ -36,4 +36,3 @@
     ];
   };
 }
-

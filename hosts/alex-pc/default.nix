@@ -1,15 +1,19 @@
-{ lib, pkgs, chaotic, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
-    ./filesystem.nix        # Filesystem Configuration
-    ./desktop.nix           # Desktop Configuration
-    ./users.nix             # Users configuration
-    ./packages.nix          # Packages
-    ./scripts.nix           # Import scripts folder
-    ../../modules/fastBoot.nix  # Fast Boot
+    ./filesystem.nix # Filesystem Configuration
+    ./desktop.nix # Desktop Configuration
+    ./users.nix # Users configuration
+    ./packages.nix # Packages
+    ./scripts.nix # Import scripts folder
+    ../../modules/fastBoot.nix # Fast Boot
   ];
-  
+
   nixpkgs = {
     config.allowUnfree = true;
     hostPlatform = lib.mkDefault "x86_64-linux";
@@ -18,6 +22,7 @@
   nix = {
     settings.auto-optimise-store = true;
     settings.experimental-features = "nix-command flakes";
+
   };
 
   boot = {
@@ -27,7 +32,10 @@
     };
 
     kernelPackages = pkgs.linuxPackages_cachyos;
-    supportedFilesystems = [ "btrfs" "ntfs" ];
+    supportedFilesystems = [
+      "btrfs"
+      "ntfs"
+    ];
     kernelModules = [ "kvm-amd" ];
     kernelParams = [
       "amd_iommu=on"
@@ -38,13 +46,17 @@
     extraModprobeConfig = ''
       options rtl8821ae ips=0 msi=0 aspm=0
     '';
-    
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" ];
+
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "usbhid"
+    ];
   };
 
   chaotic.scx.enable = true;
   chaotic.scx.scheduler = "scx_bpfland";
-  
+
   hardware.enableAllFirmware = true;
 
   # Localisation
@@ -64,11 +76,20 @@
 
   # Limits.conf
   security.pam.loginLimits = [
-    { domain = "*"; item = "nofile"; type = "hard"; value = "65535"; }
-    { domain = "*"; item = "nofile"; type = "soft"; value = "8192"; }
+    {
+      domain = "*";
+      item = "nofile";
+      type = "hard";
+      value = "65535";
+    }
+    {
+      domain = "*";
+      item = "nofile";
+      type = "soft";
+      value = "8192";
+    }
   ];
 
   # DO NOT EDIT
   system.stateVersion = "23.11";
 }
-

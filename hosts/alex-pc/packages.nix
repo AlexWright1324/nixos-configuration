@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../../packages/droidcam.nix
@@ -21,8 +21,8 @@
   systemd.services.lact = {
     enable = true;
     description = "AMDGPU Control Daemon";
-    after = ["multi-user.target"];
-    wantedBy = ["multi-user.target"];
+    after = [ "multi-user.target" ];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = "${pkgs.lact}/bin/lact daemon";
     };
@@ -41,7 +41,7 @@
       pkgs.android-udev-rules
     ];
   };
-  
+
   programs = {
     adb.enable = true;
     virt-manager.enable = true;

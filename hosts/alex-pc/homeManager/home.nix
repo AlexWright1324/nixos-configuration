@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./spicetify.nix 
+    ./spicetify.nix
   ];
 
   home = {
@@ -20,8 +20,8 @@
       kdePackages.kdepim-addons
       kdePackages.kmail-account-wizard
     ];
-    
-    sessionVariables =  {
+
+    sessionVariables = {
       MANGOHUD = "1";
     };
 
@@ -36,9 +36,11 @@
   programs = {
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhsWithPackages (ps: with ps; [
-        #rustup zlib openssl.dev pkg-config
-      ]);
+      package = pkgs.vscode.fhsWithPackages (
+        ps: with ps; [
+          #rustup zlib openssl.dev pkg-config
+        ]
+      );
     };
 
     direnv = {
@@ -48,7 +50,6 @@
     };
     bash.enable = true;
   };
-
 
   programs.home-manager.enable = true;
 }
