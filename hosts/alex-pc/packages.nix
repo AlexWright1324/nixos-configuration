@@ -1,13 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, chaotic, ... }:
 {
   imports = [
     ../../packages/droidcam.nix
     # ./packages/cloudflareWarp.nix
   ];
 
+  chaotic.scx.enable = true;
+
   environment.systemPackages = with pkgs; [
     # CLI
-    scx # Kernel Scheduler
     vim
     htop
     wget

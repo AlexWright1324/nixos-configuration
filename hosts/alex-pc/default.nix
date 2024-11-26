@@ -10,7 +10,7 @@
     ./desktop.nix # Desktop Configuration
     ./users.nix # Users configuration
     ./packages.nix # Packages
-    ./scripts.nix # Import scripts folder
+    ../../modules/scripts.nix # Scripts
     ../../modules/fastBoot.nix # Fast Boot
   ];
 
@@ -20,9 +20,14 @@
   };
 
   nix = {
-    settings.auto-optimise-store = true;
     settings.experimental-features = "nix-command flakes";
+    settings.auto-optimise-store = true;
 
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
   };
 
   boot = {

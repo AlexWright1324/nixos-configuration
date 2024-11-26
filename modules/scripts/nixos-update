@@ -8,5 +8,6 @@ fi
 
 cd /etc/nixos
 
-nix-collect-garbage -d
-nixos-rebuild switch
+nix flake update --flake .
+
+echo -e "\e[33mNixOS System Flake Updated\e[0m"
