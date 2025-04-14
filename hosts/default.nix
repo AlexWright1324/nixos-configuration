@@ -9,8 +9,17 @@
         };
         modules = [
           ./alex-pc
-
+          inputs.nix-index-database.nixosModules.nix-index # Nix Index
           inputs.chaotic.nixosModules.default # Chaotic Nyx
+
+          # Cosmic
+          {
+            nix.settings = {
+              substituters = [ "https://cosmic.cachix.org/" ];
+              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+            };
+          }
+          inputs.nixos-cosmic.nixosModules.default
 
           inputs.home-manager.nixosModules.home-manager
           {
@@ -24,6 +33,7 @@
           }
         ];
       };
+
       "Frank-Laptop-NixOS" = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {

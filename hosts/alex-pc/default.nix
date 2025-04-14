@@ -45,8 +45,7 @@
     kernelParams = [
       "amd_iommu=on"
       "iommu=pt"
-      "kvm.ignore_msrs=1"
-      "kvm.report_ignored_msrs=0"
+      "amdgpu.ppfeaturemask=0xffffffff"
     ];
     extraModprobeConfig = ''
       options rtl8821ae ips=0 msi=0 aspm=0
@@ -58,9 +57,6 @@
       "usbhid"
     ];
   };
-
-  chaotic.scx.enable = true;
-  chaotic.scx.scheduler = "scx_bpfland";
 
   hardware.enableAllFirmware = true;
 

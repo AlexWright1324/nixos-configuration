@@ -5,8 +5,6 @@
     # ./packages/cloudflareWarp.nix
   ];
 
-  chaotic.scx.enable = true;
-
   environment.systemPackages = with pkgs; [
     # CLI
     vim
@@ -15,7 +13,7 @@
     p7zip
     unrar
     lact
-    docker-compose
+    podman-compose
     git-credential-oauth
   ];
 
@@ -41,9 +39,29 @@
     udev.packages = [
       pkgs.android-udev-rules
     ];
+    scx = {
+      enable = true;
+      scheduler = "scx_rusty";
+    };
+    ollama = {
+      enable = true;
+      acceleration = "rocm";
+      environmentVariables = {
+        HCC_AMDGPU_TARGET = "gfx1031"; # used to be necessary, but doesn't seem to anymore
+      };
+      rocmOverrideGfx = "10.3.1";
+      #package = pkgs.ollama-rocm;
+    };
+    open-webui.enable = true;
   };
 
   programs = {
+    nix-ld.enable = true;
+
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
     adb.enable = true;
     virt-manager.enable = true;
     partition-manager.enable = true;
@@ -55,6 +73,7 @@
       };
       gamescopeSession.enable = true;
     };
+    gamemode.enable = true;
 
     git = {
       enable = true;
@@ -67,11 +86,12 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      pkgs.nerd-fonts.jetbrains-mono
     ];
   };
 
   virtualisation = {
+    waydroid.enable = true;
     libvirtd.enable = true;
     containers.enable = true;
     podman = {

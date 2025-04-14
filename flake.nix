@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,6 +17,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Development tooling
     flake-parts = {
@@ -25,7 +30,6 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "";
     };
-
     systems.url = "github:nix-systems/default";
   };
 
