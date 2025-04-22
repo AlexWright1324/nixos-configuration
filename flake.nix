@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,15 +36,8 @@
         ./hosts
       ];
 
-      flake = {
-        checks = builtins.mapAttrs (
-          system: deployLib: deployLib.deployChecks self.deploy
-        ) inputs.deploy-rs.lib;
-      };
-
       systems = import inputs.systems;
 
-      # Development Environment
       perSystem =
         { config, pkgs, ... }:
         {
@@ -58,14 +46,18 @@
             nixfmt-rfc-style.enable = true;
           };
 
+          formatter = pkgs.nixfmt-rfc-style;
+
           devShells.default = pkgs.mkShell {
             inputsFrom = [
+              # Include packages from pre-commit hooks
               config.pre-commit.devShell
             ];
-            packages = with pkgs; [ deploy-rs ];
+
+            # Custom dev packages
+            # packages = with pkgs; [ ];
           };
 
-          formatter = pkgs.nixfmt-rfc-style;
         };
     };
 }

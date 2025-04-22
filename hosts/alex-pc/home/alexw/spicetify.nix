@@ -2,7 +2,6 @@
 {
   imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
-  # configure spicetify :)
   programs.spicetify =
     let
       spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
@@ -14,7 +13,7 @@
 
       enabledExtensions = with spicePkgs.extensions; [
         fullAppDisplay
-        shuffle # shuffle+ (special characters are sanitized out of ext names)
+        shuffle
         hidePodcasts
         adblock
       ];

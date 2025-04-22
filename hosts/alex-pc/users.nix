@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 
 {
   users.users.alexw = {
@@ -20,14 +20,5 @@
         count = 65536;
       }
     ];
-  };
-
-  home-manager = {
-    extraSpecialArgs = {
-      inherit inputs;
-    };
-    users = {
-      "alexw" = import ./homeManager/home.nix;
-    };
   };
 }

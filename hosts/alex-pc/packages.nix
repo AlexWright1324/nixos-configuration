@@ -1,8 +1,8 @@
-{ pkgs, chaotic, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../../packages/droidcam.nix
-    # ./packages/cloudflareWarp.nix
+    ../../packages/lact.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -12,20 +12,12 @@
     wget
     p7zip
     unrar
-    lact
     podman-compose
     git-credential-oauth
-  ];
 
-  systemd.services.lact = {
-    enable = true;
-    description = "AMDGPU Control Daemon";
-    after = [ "multi-user.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.lact}/bin/lact daemon";
-    };
-  };
+    # Libraries
+    qt6.qtimageformats
+  ];
 
   services = {
     tailscale.enable = true;
@@ -47,12 +39,11 @@
       enable = true;
       acceleration = "rocm";
       environmentVariables = {
-        HCC_AMDGPU_TARGET = "gfx1031"; # used to be necessary, but doesn't seem to anymore
+        HCC_AMDGPU_TARGET = "gfx1031";
       };
       rocmOverrideGfx = "10.3.1";
-      #package = pkgs.ollama-rocm;
+      package = pkgs.ollama-rocm;
     };
-    open-webui.enable = true;
   };
 
   programs = {
@@ -68,9 +59,6 @@
 
     steam = {
       enable = true;
-      package = pkgs.steam.override {
-        extraPkgs = pkgs: [ pkgs.gperftools ];
-      };
       gamescopeSession.enable = true;
     };
     gamemode.enable = true;
@@ -81,13 +69,6 @@
         credential.helper = "${pkgs.git-credential-oauth}/bin/git-credential-oauth";
       };
     };
-  };
-
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      pkgs.nerd-fonts.jetbrains-mono
-    ];
   };
 
   virtualisation = {

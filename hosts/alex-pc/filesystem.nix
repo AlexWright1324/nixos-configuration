@@ -1,4 +1,9 @@
 {
+  boot.supportedFilesystems = [
+    "btrfs"
+    "ntfs"
+  ];
+
   fileSystems =
     let
       MainSSDBoot = "/dev/disk/by-uuid/4D2C-9454";
