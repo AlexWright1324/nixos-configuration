@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake = {
+  flake = rec {
     nixosConfigurations = {
       "Alex-PC-NixOS" = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -34,6 +34,20 @@
           ./frank-laptop
         ];
       };
+
+      "oracle" = inputs.nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./oracle
+        ];
+      };
+    };
+
+    packages = {
+      "aarch64-linux" = nixosConfigurations.oci.config.system.build.OCIImage;
     };
   };
 }

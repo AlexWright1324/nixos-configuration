@@ -57,7 +57,6 @@
             # Custom dev packages
             # packages = with pkgs; [ ];
           };
-
         };
     };
 }
