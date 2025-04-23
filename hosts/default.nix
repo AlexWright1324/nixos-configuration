@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   flake = {
     nixosConfigurations = {
@@ -42,9 +42,17 @@
         };
         modules = [
           ./oracle
+          inputs.nix-minecraft.nixosModules.minecraft-servers
+          {
+            nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
+          }
         ];
       };
     };
+
+    checks = builtins.mapAttrs (
+      system: deployLib: deployLib.deployChecks self.deploy
+    ) inputs.deploy-rs.lib;
 
     # WIP: OCI Image
     #packages = {

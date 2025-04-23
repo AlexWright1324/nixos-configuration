@@ -6,6 +6,7 @@
     ./filesystem.nix
     ./packages.nix
     ./users.nix
+    ./minecraft
     ../../modules/locale.nix
     ../../modules/fastBoot.nix
     ../../modules/scripts.nix
@@ -48,10 +49,11 @@
     hostName = "oracle";
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
-    firewall.enable = false;
   };
 
   zramSwap.enable = true;
+
+  # nixos-rebuild switch --flake .#oracle --target-host oracle --build-host oracle --fast --use-remote-sudo
 
   system.stateVersion = "25.05"; # DO NOT TOUCH!
 }
