@@ -4,6 +4,7 @@
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     ./filesystem.nix
+    ./packages.nix
     ./users.nix
     ../../modules/locale.nix
     ../../modules/fastBoot.nix
@@ -51,12 +52,6 @@
   };
 
   zramSwap.enable = true;
-
-  services = {
-    openssh = {
-      enable = true;
-    };
-  };
 
   system.stateVersion = "25.05"; # DO NOT TOUCH!
 }
