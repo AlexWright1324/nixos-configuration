@@ -57,4 +57,6 @@
       enable = true;
     };
   };
+
+  system.stateVersion = "25.05"; # DO NOT TOUCH!
 }

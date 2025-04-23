@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake = rec {
+  flake = {
     nixosConfigurations = {
       "Alex-PC-NixOS" = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -46,8 +46,9 @@
       };
     };
 
-    packages = {
-      "aarch64-linux" = nixosConfigurations.oci.config.system.build.OCIImage;
-    };
+    # WIP: OCI Image
+    #packages = {
+    #  "aarch64-linux" = nixosConfigurations.oci.config.system.build.OCIImage;
+    #};
   };
 }
