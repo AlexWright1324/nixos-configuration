@@ -1,5 +1,12 @@
-{ inputs, self, ... }:
 {
+  inputs,
+  ...
+}:
+{
+  imports = [
+    ./deploy.nix
+  ];
+
   flake = {
     nixosConfigurations = {
       "Alex-PC-NixOS" = inputs.nixpkgs.lib.nixosSystem {
@@ -49,10 +56,6 @@
         ];
       };
     };
-
-    checks = builtins.mapAttrs (
-      system: deployLib: deployLib.deployChecks self.deploy
-    ) inputs.deploy-rs.lib;
 
     # WIP: OCI Image
     #packages = {

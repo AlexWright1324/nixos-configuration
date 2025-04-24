@@ -35,8 +35,6 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    systems.url = "github:nix-systems/default";
   };
 
   outputs =
@@ -47,10 +45,18 @@
         ./hosts
       ];
 
-      systems = import inputs.systems;
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       perSystem =
-        { config, pkgs, ... }:
+        {
+          config,
+          system,
+          pkgs,
+          ...
+        }:
         {
           pre-commit.settings.hooks = {
             nil.enable = true;
@@ -66,7 +72,9 @@
             ];
 
             # Custom dev packages
-            # packages = with pkgs; [ ];
+            packages = with pkgs; [
+              deploy-rs
+            ];
           };
         };
     };
