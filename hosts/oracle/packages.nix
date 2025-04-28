@@ -7,6 +7,7 @@
     wget
     p7zip
     unrar
+    tmux
   ];
 
   programs = {
