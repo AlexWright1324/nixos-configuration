@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../packages/droidcam.nix
     ../../packages/lact.nix
   ];
 
@@ -14,6 +13,16 @@
     unrar
     podman-compose
     git-credential-oauth
+    fastfetch
+
+    # Android
+    scrcpy
+
+    # Gaming
+    mangohud
+
+    # Desktop
+    kdePackages.discover
 
     # Libraries
     qt6.qtimageformats
@@ -47,16 +56,32 @@
   };
 
   programs = {
+    # Binaries
     nix-ld.enable = true;
-
     appimage = {
       enable = true;
       binfmt = true;
     };
+
+    # Android
     adb.enable = true;
+    droidcam.enable = true;
+
     virt-manager.enable = true;
     partition-manager.enable = true;
 
+    # Desktop
+    kde-pim = {
+      enable = true;
+      kontact.enable = true;
+      kmail.enable = true;
+    };
+    kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
+
+    # Gaming
     steam = {
       enable = true;
       gamescopeSession.enable = true;
@@ -72,7 +97,6 @@
   };
 
   virtualisation = {
-    waydroid.enable = true;
     libvirtd.enable = true;
     containers.enable = true;
     podman = {

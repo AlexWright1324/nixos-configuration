@@ -17,7 +17,10 @@
       binfmt = true;
     };
 
-    git.enable = true;
+    git = {
+      enable = true;
+      lfs.enable = true;
+    };
   };
 
   services = {

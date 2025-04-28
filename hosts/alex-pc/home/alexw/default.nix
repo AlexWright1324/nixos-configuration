@@ -9,17 +9,7 @@
     username = "alexw";
     homeDirectory = "/home/alexw";
 
-    packages = with pkgs; [
-      droidcam
-      scrcpy
-      fastfetch
-      alsa-tools
-      mangohud
-      kdePackages.discover
-      kdePackages.kontact
-      kdePackages.kdepim-addons
-      kdePackages.kmail-account-wizard
-    ];
+    #packages = with pkgs; [];
 
     sessionVariables = {
       MANGOHUD = "1";
@@ -28,28 +18,19 @@
     stateVersion = "23.11";
   };
 
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
-  };
-
   programs = {
-    vscode = {
-      enable = true;
-      package = pkgs.vscode.fhsWithPackages (
-        ps: with ps; [
-          #rustup zlib openssl.dev pkg-config
-        ]
-      );
-    };
-
+    # Development
+    bash.enable = true;
     direnv = {
       enable = true;
       enableBashIntegration = true;
       nix-direnv.enable = true;
     };
-    bash.enable = true;
-  };
+    vscode = {
+      enable = true;
+      package = pkgs.vscode.fhsWithPackages;
+    };
 
-  programs.home-manager.enable = true;
+    home-manager.enable = true;
+  };
 }
