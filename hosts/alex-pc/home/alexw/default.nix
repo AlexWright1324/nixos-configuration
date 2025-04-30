@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -21,14 +21,11 @@
   programs = {
     # Development
     bash.enable = true;
+    vscode.enable = true;
     direnv = {
       enable = true;
       enableBashIntegration = true;
       nix-direnv.enable = true;
-    };
-    vscode = {
-      enable = true;
-      package = pkgs.vscode.fhsWithPackages;
     };
 
     home-manager.enable = true;

@@ -29,6 +29,7 @@
   ];
 
   services = {
+    openssh.enable = true;
     tailscale.enable = true;
     fwupd.enable = true;
     flatpak.enable = true;
@@ -73,12 +74,11 @@
     # Desktop
     kde-pim = {
       enable = true;
-      kontact.enable = true;
-      kmail.enable = true;
+      kontact = true;
+      kmail = true;
     };
     kdeconnect = {
       enable = true;
-      indicator = true;
     };
 
     # Gaming

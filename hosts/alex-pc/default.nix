@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   ...
 }:
@@ -7,13 +8,18 @@
   imports = [
     ./filesystem.nix
     ./hardware.nix
+    ./packages.nix
     ./desktop.nix
     ./users.nix
-    ./packages.nix
+    ./secrets
     ./home
+
     ../../modules/locale.nix
     ../../modules/scripts.nix
     ../../modules/fastBoot.nix
+
+    inputs.chaotic.nixosModules.default
+    inputs.nix-index-database.nixosModules.nix-index
   ];
 
   nixpkgs = {

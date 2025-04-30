@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -58,6 +62,7 @@
           ...
         }:
         {
+
           pre-commit.settings.hooks = {
             nil.enable = true;
             nixfmt-rfc-style.enable = true;
@@ -67,12 +72,11 @@
 
           devShells.default = pkgs.mkShell {
             inputsFrom = [
-              # Include packages from pre-commit hooks
               config.pre-commit.devShell
             ];
 
-            # Custom dev packages
             packages = with pkgs; [
+              inputs.agenix.packages.${system}.default
               deploy-rs
             ];
           };

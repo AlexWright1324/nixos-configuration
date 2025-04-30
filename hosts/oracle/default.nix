@@ -1,4 +1,8 @@
-{ lib, modulesPath, ... }:
+{
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
@@ -7,6 +11,7 @@
     ./packages.nix
     ./users.nix
     ./minecraft
+    ./secrets
     ../../modules/locale.nix
     ../../modules/fastBoot.nix
     ../../modules/scripts.nix
@@ -23,6 +28,10 @@
         "nix-command"
         "flakes"
       ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
       auto-optimise-store = true;
     };
 
@@ -37,7 +46,10 @@
     initrd.availableKernelModules = [ "virtio_scsi" ];
     loader = {
       efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
     };
   };
 
