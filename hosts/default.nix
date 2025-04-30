@@ -16,19 +16,6 @@
         };
         modules = [
           ./alex-pc
-          inputs.chaotic.nixosModules.default # Chaotic Nyx
-          inputs.nix-index-database.nixosModules.nix-index # Nix Index
-
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                inherit inputs;
-              };
-            };
-          }
         ];
       };
 
@@ -38,6 +25,7 @@
           inherit inputs;
         };
         modules = [
+          inputs.sops-nix.nixosModules.sops
           ./frank-laptop
         ];
       };
@@ -49,6 +37,8 @@
         };
         modules = [
           ./oracle
+          inputs.sops-nix.nixosModules.sops
+
           inputs.nix-minecraft.nixosModules.minecraft-servers
           {
             nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];

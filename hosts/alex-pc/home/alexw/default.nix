@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -28,7 +28,6 @@
     };
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhsWithPackages;
     };
 
     home-manager.enable = true;

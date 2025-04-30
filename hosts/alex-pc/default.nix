@@ -1,15 +1,20 @@
 {
+  inputs,
   lib,
   ...
 }:
 
 {
   imports = [
+    inputs.chaotic.nixosModules.default
+    inputs.nix-index-database.nixosModules.nix-index
+
     ./filesystem.nix
     ./hardware.nix
+    ./packages.nix
     ./desktop.nix
     ./users.nix
-    ./packages.nix
+    ./sops.nix
     ./home
     ../../modules/locale.nix
     ../../modules/scripts.nix

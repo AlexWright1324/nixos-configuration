@@ -1,9 +1,10 @@
-{ ... }:
+{ config, ... }:
 
 {
   users.users.alexw = {
     isNormalUser = true;
     description = "Alex Wright";
+    hashedPasswordFile = config.sops.secrets.hashedPassword.path;
     extraGroups = [
       "wheel"
       "libvirtd"
