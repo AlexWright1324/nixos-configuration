@@ -15,4 +15,5 @@ let
 in
 {
   "secrets/hashedPassword.age".publicKeys = allSystemsAndUsers;
+  "hosts/oracle/secrets/forwardingSecret.age".publicKeys = allSystemsAndUsers;
 }

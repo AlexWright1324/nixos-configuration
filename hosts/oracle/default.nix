@@ -37,18 +37,20 @@
 
     gc = {
       automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 14d";
+      options = "--delete-older-than 10d";
     };
   };
 
   boot = {
     initrd.availableKernelModules = [ "virtio_scsi" ];
     loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 5;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+      grub = {
+        efiSupport = true;
+        device = "nodev";
       };
     };
   };

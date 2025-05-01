@@ -7,8 +7,7 @@
   flake = {
     deploy = {
       remoteBuild = true;
-      sshUser = "alexw";
-      interactiveSudo = true;
+      sshUser = "root";
 
       nodes = {
         "oracle" = {

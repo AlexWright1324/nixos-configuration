@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   services.minecraft-servers.servers.velocity = {
     enable = true;
@@ -18,7 +18,7 @@
           url = "https://download.geysermc.org/v2/projects/geyser/versions/${version}/builds/${build}/downloads/velocity";
           hash = "sha256-OeLEVXiAKMJkxXptZxWJ026mSJun/s2OgvglEXpLDQ8=";
         };
-      "plugins/fllodgate-velocity.jar" =
+      "plugins/floodgate-velocity.jar" =
         let
           version = "2.2.4";
           build = "116";
@@ -30,6 +30,7 @@
           hash = "sha256-fq9Vw3A4DWyPaL4+k8XPpBw1EcQyXzmi/4P5dg+hNmo=";
         };
       "velocity.toml" = ./velocity.toml;
+      "forwarding.secret" = config.age.secrets.forwardingSecret.path;
     };
   };
 

@@ -13,7 +13,7 @@
     in
     {
       # Main Drive
-      "/boot" = {
+      "/boot/efi" = {
         device = Boot;
         fsType = "vfat";
         options = [

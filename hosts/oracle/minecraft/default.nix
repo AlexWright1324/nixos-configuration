@@ -1,9 +1,10 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 {
   imports = [
     inputs.nix-minecraft.nixosModules.minecraft-servers
 
     ./velocity
+    ./lobby
     ./keira
   ];
 
@@ -12,15 +13,5 @@
   services.minecraft-servers = {
     enable = true;
     eula = true;
-
-    servers = {
-      fabric = {
-        enable = true;
-
-        package = pkgs.fabricServers.fabric-1_21_5.override {
-          loaderVersion = "0.16.14";
-        };
-      };
-    };
   };
 }
