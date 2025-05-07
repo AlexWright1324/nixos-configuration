@@ -17,6 +17,7 @@
     ../../modules/locale.nix
     ../../modules/scripts.nix
     ../../modules/fastBoot.nix
+    inputs.nixos-hardware.nixosModules.gigabyte-b550
 
     inputs.chaotic.nixosModules.default
     inputs.nix-index-database.nixosModules.nix-index

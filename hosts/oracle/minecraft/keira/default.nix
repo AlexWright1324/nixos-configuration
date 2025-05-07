@@ -18,6 +18,10 @@
         url = "https://github.com/pcal43/fastback/releases/download/0.24.1%2B1.21.5/fastback-0.24.1+1.21.5-fabric.jar";
         hash = "sha256-jyGHV4vpxmApOlxVqArN0WarY37DmBvDBrVKlx+cDgM=";
       };
+      "mods/whereisit.jar" = pkgs.fetchurl {
+        url = "https://github.com/TimHoogervorst/WhereIsIt/releases/download/2.6.4%2B1.21.5/whereisit-2.6.4+1.21.5+dev-72745fc.jar";
+        hash = "sha256-CCJ3Ix15S6Nf1NU5DSH6tiJLdmu73Jb9aVWeDHpi57c=";
+      };
       # FabricProxy-Lite
     };
   };

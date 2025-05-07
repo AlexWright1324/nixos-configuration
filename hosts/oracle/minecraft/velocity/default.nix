@@ -29,10 +29,19 @@
           url = "https://download.geysermc.org/v2/projects/floodgate/versions/${version}/builds/${build}/downloads/velocity";
           hash = "sha256-fq9Vw3A4DWyPaL4+k8XPpBw1EcQyXzmi/4P5dg+hNmo=";
         };
+      "plugins/voicechat-velocity.jar" = pkgs.fetchurl {
+        pname = "voicechat-velocity";
+        version = "2.5.30";
+        url = "https://cdn.modrinth.com/data/9eGKb6K1/versions/gN7gtGyZ/voicechat-velocity-2.5.30.jar";
+        hash = "sha256-PTIOsH6OvbxaOPZxFD8hjnRr80VdLj+Xcx9PnWwdGSI=";
+      };
       "velocity.toml" = ./velocity.toml;
       "forwarding.secret" = config.age.secrets.forwardingSecret.path;
     };
   };
 
-  networking.firewall.allowedUDPPorts = [ 19132 ];
+  networking.firewall.allowedUDPPorts = [
+    25565
+    19132
+  ];
 }

@@ -9,6 +9,8 @@
         wayland.enable = true;
         settings.General.DisplayServer = "wayland";
       };
+      autoLogin.enable = true;
+      autoLogin.user = "alexw";
     };
     desktopManager = {
       plasma6.enable = true;
