@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -10,6 +10,15 @@
     homeDirectory = "/home/alexw";
 
     #packages = with pkgs; [];
+
+    file = {
+      ".local/share/lutris/runners/proton/GE-Proton" = {
+        source = pkgs.proton-ge-bin.steamcompattool;
+      };
+      ".config/heroic/tools/proton/GE-Proton" = {
+        source = pkgs.proton-ge-bin.steamcompattool;
+      };
+    };
 
     sessionVariables = {
       MANGOHUD = "1";

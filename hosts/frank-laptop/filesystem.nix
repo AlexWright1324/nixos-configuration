@@ -1,4 +1,9 @@
 {
+  boot.supportedFilesystems = [
+    "btrfs"
+    "ntfs"
+  ];
+
   fileSystems =
     let
       device = "/dev/disk/by-uuid/6f17ed96-4fd5-4eb6-aff7-dbfc886f4949";

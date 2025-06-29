@@ -2,11 +2,17 @@
 {
   environment.systemPackages = with pkgs; [
     # CLI
-    git
     htop
     wget
     p7zip
     unrar
+
+    # Desktop
+    kdePackages.discover
+    kdePackages.krfb
+
+    # Libraries
+    qt6.qtimageformats
   ];
 
   services = {
@@ -17,22 +23,24 @@
     udev.packages = [
       pkgs.android-udev-rules
     ];
+    udisks2.enable = true;
   };
 
   programs = {
     adb.enable = true;
+
     partition-manager.enable = true;
+
     firefox.enable = true;
+
     appimage = {
       enable = true;
       binfmt = true;
     };
-  };
 
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-    ];
+    kdeconnect.enable = true;
+    k3b.enable = true;
+
+    git.enable = true;
   };
 }

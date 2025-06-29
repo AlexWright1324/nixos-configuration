@@ -4,7 +4,10 @@
   users.users.frank = {
     isNormalUser = true;
     description = "Frank Wright";
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "wheel"
+      "cdrom"
+    ];
   };
 
   users.users.alexw = {

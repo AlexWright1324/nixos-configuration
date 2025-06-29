@@ -4,6 +4,9 @@
   ...
 }:
 {
+
+  #
+
   flake = {
     deploy = {
       remoteBuild = true;
@@ -17,6 +20,18 @@
           profiles.system = {
             user = "root";
             path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.oracle;
+          };
+        };
+        "Frank-Laptop-NixOS" = {
+          hostname = "Frank-Laptop-NixOS";
+          sshUser = "alexw";
+          interactiveSudo = true;
+
+          profiles.system = {
+            user = "root";
+            path =
+              inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+                self.nixosConfigurations."Frank-Laptop-NixOS";
           };
         };
       };

@@ -19,10 +19,13 @@
     scrcpy
 
     # Gaming
+    lutris
+    heroic
     mangohud
 
     # Desktop
     kdePackages.discover
+    kdePackages.krfb
 
     # Libraries
     qt6.qtimageformats
@@ -38,9 +41,6 @@
       enable = true;
       nssmdns4 = true;
     };
-    udev.packages = [
-      pkgs.android-udev-rules
-    ];
     scx = {
       enable = true;
       scheduler = "scx_rusty";
@@ -66,7 +66,7 @@
 
     # Android
     adb.enable = true;
-    droidcam.enable = true;
+    #droidcam.enable = true;
 
     virt-manager.enable = true;
     partition-manager.enable = true;
@@ -85,6 +85,9 @@
     steam = {
       enable = true;
       gamescopeSession.enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
     };
     gamemode.enable = true;
 

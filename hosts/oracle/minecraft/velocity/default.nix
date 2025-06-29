@@ -9,14 +9,14 @@
     symlinks = {
       "plugins/Geyser-Velocity.jar" =
         let
-          version = "2.7.0";
-          build = "818";
+          version = "2.7.1";
+          build = "826";
         in
         pkgs.fetchurl {
           pname = "Geyser-Velocity";
           version = "${version}-${build}";
           url = "https://download.geysermc.org/v2/projects/geyser/versions/${version}/builds/${build}/downloads/velocity";
-          hash = "sha256-OeLEVXiAKMJkxXptZxWJ026mSJun/s2OgvglEXpLDQ8=";
+          hash = "sha256-4zWPDCItmMvaxcVGezD8OMTCNWFhsvRPYePbal3uTSg=";
         };
       "plugins/floodgate-velocity.jar" =
         let

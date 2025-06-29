@@ -4,6 +4,7 @@
     inputs.nix-minecraft.nixosModules.minecraft-servers
 
     ./velocity
+    ./xbox
     ./lobby
     ./keira
   ];

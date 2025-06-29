@@ -1,66 +1,39 @@
-{ lib, ... }:
+{ ... }:
 
 {
   imports = [
-    ./desktop.nix # Desktop Configuration
-    ./filesystem.nix # Filesystem Configuration
-    ./packages.nix # Packages
-    ./users.nix # Users configuration
-    ../../modules/fastBoot.nix # Fast Boot
-    ../../packages/lact.nix
+    ./filesystem.nix
+    ./hardware.nix
+    ./packages.nix
+    ./desktop.nix
+    ./users.nix
+
+    ../../modules/locale.nix
+    ../../modules/scripts.nix
+    ../../modules/fastBoot.nix
   ];
 
   nixpkgs = {
     config.allowUnfree = true;
+    hostPlatform = "x86_64-linux";
   };
 
   nix = {
-    settings.auto-optimise-store = true;
-    settings.experimental-features = "nix-command flakes";
-  };
-
-  boot = {
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      auto-optimise-store = true;
     };
 
-    #kernelPackages = pkgs.linuxPackages_cachyos;
-    supportedFilesystems = [
-      "btrfs"
-      "ntfs"
-    ];
-    kernelModules = [ "kvm-amd" ];
-    kernelParams = [
-      "amd_iommu=on"
-      "iommu=pt"
-    ];
-
-    initrd.availableKernelModules = [
-      "nvme"
-      "xhci_pci"
-      "ums_realtek"
-      "usb_storage"
-      "usbhid"
-    ];
-
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
   };
 
-  hardware.enableAllFirmware = true;
-
-  # Localisation
-  time.timeZone = "Europe/London";
-  i18n.defaultLocale = "en_GB.UTF-8";
-  console.keyMap = "uk";
-
-  networking = {
-    hostName = "Frank-Laptop-NixOS";
-    networkmanager.enable = true;
-    useDHCP = lib.mkDefault true;
-    firewall.enable = false;
-  };
-
-  # ZRAM generator
   zramSwap.enable = true;
 
   # Limits.conf
@@ -78,6 +51,9 @@
       value = "8192";
     }
   ];
+
+  # Not needed in 25.11 hopefully
+  system.rebuild.enableNg = true;
 
   # DO NOT EDIT
   system.stateVersion = "23.11";
