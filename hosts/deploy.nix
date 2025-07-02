@@ -1,6 +1,7 @@
 {
   inputs,
   self,
+  withSystem,
   ...
 }:
 {
@@ -12,29 +13,45 @@
       remoteBuild = true;
       sshUser = "root";
 
-      nodes = {
-        "oracle" = {
-          # TODO: Require DNS to be set up between the machines
-          hostname = "oracle";
+      nodes =
+        let
+          deployPath =
+            nixos:
+            withSystem (nixos.pkgs.system) ({ deployPkgs, ... }: deployPkgs.deploy-rs.lib.activate.nixos nixos);
+        in
+        {
+          "oracle" = {
+            # TODO: Require DNS to be set up between the machines
+            hostname = "oracle";
 
-          profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.oracle;
+            profiles.system = {
+              user = "root";
+              path = deployPath self.nixosConfigurations.oracle;
+            };
+          };
+
+          "aquila" = {
+            hostname = "aquila";
+            sshUser = "alexw";
+            remoteBuild = false; # Low memory device
+
+            profiles.system = {
+              user = "root";
+              path = deployPath self.nixosConfigurations.aquila;
+            };
+          };
+
+          "Frank-Laptop-NixOS" = {
+            hostname = "Frank-Laptop-NixOS";
+            sshUser = "alexw";
+            interactiveSudo = true;
+
+            profiles.system = {
+              user = "root";
+              path = deployPath self.nixosConfigurations."Frank-Laptop-NixOS";
+            };
           };
         };
-        "Frank-Laptop-NixOS" = {
-          hostname = "Frank-Laptop-NixOS";
-          sshUser = "alexw";
-          interactiveSudo = true;
-
-          profiles.system = {
-            user = "root";
-            path =
-              inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-                self.nixosConfigurations."Frank-Laptop-NixOS";
-          };
-        };
-      };
     };
 
     checks = builtins.mapAttrs (

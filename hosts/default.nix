@@ -45,6 +45,9 @@
           inherit inputs;
         };
         modules = [
+          # Build NixOS SD card image for Aquila
+          # > nix build .#nixosConfigurations.aquila.config.system.build.sdImage
+          "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           ./aquila
         ];
       };

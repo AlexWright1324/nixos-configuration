@@ -36,6 +36,8 @@
       "xhci_pci"
       "usbhid"
     ];
+
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   hardware = {

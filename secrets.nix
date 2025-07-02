@@ -14,6 +14,8 @@ let
   allSystemsAndUsers = allSystems ++ allUsers;
 in
 {
-  "secrets/hashedPassword.age".publicKeys = allSystemsAndUsers;
+  "secrets/passwords/hashedPassword.age".publicKeys = allSystemsAndUsers;
+  "secrets/wifi/tshotc.age".publicKeys = allSystemsAndUsers;
+
   "hosts/oracle/secrets/forwardingSecret.age".publicKeys = allSystemsAndUsers;
 }

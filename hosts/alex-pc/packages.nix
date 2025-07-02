@@ -29,6 +29,9 @@
 
     # Libraries
     qt6.qtimageformats
+
+    # Printing
+    orca-slicer
   ];
 
   services = {

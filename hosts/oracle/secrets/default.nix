@@ -10,7 +10,7 @@
 
     secrets = {
       hashedPassword = {
-        file = ../../../secrets/hashedPassword.age;
+        file = ../../../secrets/passwords/hashedPassword.age;
       };
       forwardingSecret = {
         file = ./forwardingSecret.age;

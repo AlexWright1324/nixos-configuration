@@ -63,7 +63,6 @@
           ...
         }:
         {
-
           pre-commit.settings.hooks = {
             nil.enable = true;
             nixfmt-rfc-style.enable = true;
@@ -79,6 +78,20 @@
             packages = with pkgs; [
               inputs.agenix.packages.${system}.default
               deploy-rs
+            ];
+          };
+
+          _module.args.deployPkgs = import inputs.nixpkgs {
+            # https://github.com/serokell/deploy-rs/blob/3867348fa92bc892eba5d9ddb2d7a97b9e127a8a/README.md?plain=1#L102-L107
+            inherit system;
+            overlays = [
+              inputs.deploy-rs.overlays.default
+              (self: super: {
+                deploy-rs = {
+                  inherit (pkgs) deploy-rs;
+                  lib = super.deploy-rs.lib;
+                };
+              })
             ];
           };
         };
