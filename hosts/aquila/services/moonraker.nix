@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   services.moonraker = {
     enable = true;
@@ -22,6 +22,34 @@
           "*://${config.networking.hostName}"
         ];
       };
+
+      octoprint_compat = { };
+
+      file_manager = {
+        enable_object_processing = true;
+      };
+
+      announcements = {
+        subscriptions = [ "fluidd" ];
+      };
+
+      update_manager = {
+        enable_auto_refresh = true;
+        enable_system_updates = [ false ];
+      };
+
+      "update_manager Klipper-Adaptive-Meshing-Purging" = {
+        type = "git_repo";
+        channel = "dev";
+        path = "${config.services.moonraker.stateDir}/config/KAMP";
+        origin = "https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging.git";
+        managed_services = [ "klipper" ];
+        primary_branch = "main";
+      };
     };
+  };
+
+  systemd.services.moonraker = {
+    path = with pkgs; [ git ];
   };
 }

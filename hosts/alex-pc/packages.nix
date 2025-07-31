@@ -35,6 +35,11 @@
   ];
 
   services = {
+    hardware.openrgb = {
+      enable = true;
+      package = pkgs.openrgb-with-all-plugins;
+      motherboard = "amd";
+    };
     openssh.enable = true;
     tailscale.enable = true;
     fwupd.enable = true;

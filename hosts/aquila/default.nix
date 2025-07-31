@@ -90,6 +90,10 @@
     openssh.enable = true;
   };
 
+  programs = {
+    git.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     libraspberrypi
     htop
