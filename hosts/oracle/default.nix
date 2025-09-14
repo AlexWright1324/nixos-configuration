@@ -11,6 +11,7 @@
     ./packages.nix
     ./users.nix
     ./minecraft
+    ./website
     ./secrets
     ../../modules/locale.nix
     ../../modules/fastBoot.nix
@@ -67,7 +68,7 @@
 
   zramSwap.enable = true;
 
-  # nixos-rebuild switch --flake .#oracle --target-host oracle --build-host oracle --fast --use-remote-sudo
+  # nixos-rebuild switch --flake .#oracle --target-host oracle --build-host oracle --no-reexec --sudo --ask-sudo-password
 
   system.stateVersion = "25.05"; # DO NOT TOUCH!
 }

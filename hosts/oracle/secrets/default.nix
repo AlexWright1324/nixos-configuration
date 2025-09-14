@@ -17,6 +17,11 @@
         owner = "minecraft";
         group = "minecraft";
       };
+      caddyEnvironmentFile = {
+        file = ./caddyEnvironmentFile.age;
+        owner = "caddy";
+        group = "caddy";
+      };
     };
   };
 }

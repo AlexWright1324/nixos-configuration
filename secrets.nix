@@ -18,4 +18,5 @@ in
   "secrets/wifi/tshotc.age".publicKeys = allSystemsAndUsers;
 
   "hosts/oracle/secrets/forwardingSecret.age".publicKeys = allSystemsAndUsers;
+  "hosts/oracle/secrets/caddyEnvironmentFile.age".publicKeys = allSystemsAndUsers;
 }

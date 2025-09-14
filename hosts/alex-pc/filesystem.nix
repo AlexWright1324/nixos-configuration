@@ -12,6 +12,7 @@
 
       btrfsOptions = [
         "compress=zstd"
+        "space_cache=v2"
       ];
     in
     {
@@ -25,14 +26,16 @@
         fsType = "btrfs";
         options = [
           "subvol=@nixos-root"
-        ] ++ btrfsOptions;
+        ]
+        ++ btrfsOptions;
       };
       "/home" = {
         device = MainSSDBtrfs;
         fsType = "btrfs";
         options = [
           "subvol=@nixos-home"
-        ] ++ btrfsOptions;
+        ]
+        ++ btrfsOptions;
       };
       "/nix" = {
         device = MainSSDBtrfs;
@@ -40,14 +43,16 @@
         options = [
           "subvol=@nixos-nix"
           "noatime"
-        ] ++ btrfsOptions;
+        ]
+        ++ btrfsOptions;
       };
       "/mnt/share" = {
         device = MainSSDBtrfs;
         fsType = "btrfs";
         options = [
           "subvol=@share"
-        ] ++ btrfsOptions;
+        ]
+        ++ btrfsOptions;
       };
 
       # Others
@@ -59,7 +64,8 @@
           "noauto"
           "x-systemd.automount"
           "x-systemd.idle-timeout=600"
-        ] ++ btrfsOptions;
+        ]
+        ++ btrfsOptions;
       };
     };
 }

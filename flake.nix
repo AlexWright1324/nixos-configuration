@@ -27,6 +27,10 @@
       url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    website = {
+      url = "git+ssh://git@github.com/alexwright1324/alexjameswright.net";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Development tooling
     flake-parts = {

@@ -1,7 +1,15 @@
 { pkgs, lib, ... }:
 {
   boot = {
+    plymouth = {
+      enable = true;
+      theme = "breeze";
+    };
+
+    consoleLogLevel = 3;
+
     loader = {
+      timeout = 3;
       efi.canTouchEfiVariables = true;
       systemd-boot = {
         enable = true;
@@ -17,6 +25,11 @@
 
     kernelModules = [ "kvm-amd" ];
     kernelParams = [
+      "quiet"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+
       # KVM-AMD
       "amd_iommu=on"
       "iommu=pt"
@@ -30,12 +43,16 @@
       options rtl8821ae ips=0 msi=0 aspm=0
     '';
 
-    # Boot parameters for the kernel
-    initrd.availableKernelModules = [
-      "nvme"
-      "xhci_pci"
-      "usbhid"
-    ];
+    initrd = {
+      verbose = false;
+      systemd.enable = true;
+
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "usbhid"
+      ];
+    };
 
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
