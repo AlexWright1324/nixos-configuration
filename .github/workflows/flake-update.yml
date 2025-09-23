@@ -1,0 +1,53 @@
+name: Update flake inputs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * 1' # Mondays at 04:00 UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: flake-update
+  cancel-in-progress: false
+
+jobs:
+  flake-update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+       NIXPKGS_ALLOW_UNFREE: "1"
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Update flake inputs
+        id: update
+        shell: bash
+        run: |
+          set -euxo pipefail
+          nix --version
+          nix flake update
+          if git diff --quiet -- flake.lock; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request with updated lock file
+        if: steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "> nix flake update"
+          title: "Automated flake.lock update"
+          body: |
+            Automated flake.lock update
+            > `nix flake update`
+          branch: actions/flake-update
+          delete-branch: true
+          add-paths: flake.lock

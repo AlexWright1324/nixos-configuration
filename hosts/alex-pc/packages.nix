@@ -102,7 +102,10 @@
     git = {
       enable = true;
       config = {
-        credential.helper = "${pkgs.git-credential-oauth}/bin/git-credential-oauth";
+        credential.helper = [
+          "cache --timeout 21600"
+          "${pkgs.git-credential-oauth}/bin/git-credential-oauth"
+        ];
       };
     };
   };
