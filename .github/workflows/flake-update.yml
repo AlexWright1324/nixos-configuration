@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  issues: write
   pull-requests: write
 
 concurrency:
@@ -25,29 +27,9 @@ jobs:
           fetch-depth: 0
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
-
-      - name: Update flake inputs
-        id: update
-        shell: bash
-        run: |
-          set -euxo pipefail
-          nix --version
-          nix flake update
-          if git diff --quiet -- flake.lock; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Create pull request with updated lock file
-        if: steps.update.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v7
+      - uses: DeterminateSystems/update-flake-lock@main
         with:
-          commit-message: "> nix flake update"
-          title: "Automated flake.lock update"
-          body: |
-            Automated flake.lock update
-            > `nix flake update`
-          branch: actions/flake-update
-          delete-branch: true
-          add-paths: flake.lock
+          pr-title: "Update Nix flake inputs"
+          pr-labels: |
+            dependencies
+            automated
