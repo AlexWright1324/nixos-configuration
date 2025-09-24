@@ -26,14 +26,16 @@
         fsType = "btrfs";
         options = [
           "subvol=@root"
-        ] ++ btrfsOptions;
+        ]
+        ++ btrfsOptions;
       };
       "/home" = {
         device = Main;
         fsType = "btrfs";
         options = [
           "subvol=@home"
-        ] ++ btrfsOptions;
+        ]
+        ++ btrfsOptions;
       };
       "/nix" = {
         device = Main;
@@ -41,7 +43,8 @@
         options = [
           "subvol=@nix"
           "noatime"
-        ] ++ btrfsOptions;
+        ]
+        ++ btrfsOptions;
       };
     };
 }
