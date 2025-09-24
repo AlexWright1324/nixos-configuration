@@ -1,4 +1,4 @@
-name: Update flake inputs
+name: Update Flake inputs
 
 on:
   workflow_dispatch:
