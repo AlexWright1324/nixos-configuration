@@ -22,14 +22,23 @@ jobs:
     env:
       NIXPKGS_ALLOW_UNFREE: "1"
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: DeterminateSystems/update-flake-lock@main
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Install Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@main
         with:
           pr-title: "Update Nix flake inputs"
           pr-labels: |
             dependencies
             automated
+          nix-options: "--access-tokens github.com=${{ secrets.GH_TOKEN_FOR_UPDATES }}"
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
