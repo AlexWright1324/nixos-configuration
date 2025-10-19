@@ -1,12 +1,9 @@
 {
+  self,
   inputs,
   ...
 }:
 {
-  imports = [
-    ./deploy.nix
-  ];
-
   flake = {
     nixosConfigurations = {
       "Alex-PC-NixOS" = inputs.nixpkgs.lib.nixosSystem {
@@ -49,6 +46,16 @@
           # > nix build .#nixosConfigurations.aquila.config.system.build.sdImage
           "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           ./aquila
+        ];
+      };
+      "xyber" = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./xyber
+          self.nixosModules.googlefindmytools
         ];
       };
     };

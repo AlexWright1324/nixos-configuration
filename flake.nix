@@ -21,6 +21,10 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Oracle
     nix-minecraft = {
@@ -40,10 +44,6 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "";
     };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -52,6 +52,7 @@
       imports = [
         inputs.pre-commit-hooks-nix.flakeModule
         ./hosts
+        ./packages
       ];
 
       systems = [
@@ -70,6 +71,8 @@
           pre-commit.settings.hooks = {
             nil.enable = true;
             nixfmt-rfc-style.enable = true;
+
+            ripsecrets.enable = true; # Scan for secrets
           };
 
           formatter = pkgs.nixfmt-rfc-style;
@@ -79,23 +82,8 @@
               config.pre-commit.devShell
             ];
 
-            packages = with pkgs; [
+            packages = [
               inputs.agenix.packages.${system}.default
-              deploy-rs
-            ];
-          };
-
-          _module.args.deployPkgs = import inputs.nixpkgs {
-            # https://github.com/serokell/deploy-rs/blob/3867348fa92bc892eba5d9ddb2d7a97b9e127a8a/README.md?plain=1#L102-L107
-            inherit system;
-            overlays = [
-              inputs.deploy-rs.overlays.default
-              (self: super: {
-                deploy-rs = {
-                  inherit (pkgs) deploy-rs;
-                  lib = super.deploy-rs.lib;
-                };
-              })
             ];
           };
         };

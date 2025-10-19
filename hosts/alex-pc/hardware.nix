@@ -63,28 +63,30 @@
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        rocmPackages.clr.icd
+        #rocmPackages.clr.icd
       ];
     };
     bluetooth.enable = true;
+    rtl-sdr.enable = true;
   };
 
   # HIP Libraries
-  systemd.tmpfiles.rules =
-    let
-      rocmEnv = pkgs.symlinkJoin {
-        name = "rocm-combined";
-        paths = with pkgs.rocmPackages; [
-          rocblas
-          hipblas
-          clr
-        ];
-      };
-    in
-    [
-      "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
-    ];
-
+  /*
+    systemd.tmpfiles.rules =
+      let
+        rocmEnv = pkgs.symlinkJoin {
+          name = "rocm-combined";
+          paths = with pkgs.rocmPackages; [
+            rocblas
+            hipblas
+            clr
+          ];
+        };
+      in
+      [
+        "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
+      ];
+  */
   networking = {
     hostName = "Alex-PC-NixOS";
     networkmanager.enable = true;
