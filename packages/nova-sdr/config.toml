@@ -1,0 +1,60 @@
+# NovaSDR Configuration — RTL-SDR (curated)
+# Device: RTL-SDR via rtl_sdr
+# Capture format: u8 (8-bit unsigned IQ)
+#
+# Run example (WBFM @ 100.9 MHz, 2.048 Msps):
+#   rtl_sdr -g 48 -f 100900000 -s 2048000 - | ./build/spectrumserver --config config.example.rtlsdr.toml
+#
+# Notes:
+# - Conservative defaults chosen to start reliably on typical hardware.
+# - Keep waterfall zstd + FLAC audio; these do not require extra codecs.
+# - Avoid "opus" and "av1" unless NovaSDR was compiled with those codecs.
+# - If CPU/memory is tight, reduce input.fft_size, then input.sps.
+
+[server]
+port = 9002
+host = "0.0.0.0"
+otherusers = 1
+threads = 4
+
+[websdr]
+register_online = false
+name = "NovaSDR (RTL-SDR)"
+antenna = "Dipole"
+grid_locator = "JN86"
+hostname = "0.0.0.0"
+operator = ""
+email = ""
+callsign_lookup_url = "https://www.qrz.com/db/"
+chat_enabled = false
+
+[limits]
+# Multi-user caps; adjust to your host capacity
+audio = 100
+waterfall = 200
+events = 200
+
+[input]
+# Core parameters
+sps = 3200000                 # 2.048 Msps
+frequency = 3600000         # Center frequency (Hz)
+signal = "iq"                 # RTL-SDR outputs IQ
+
+# Performance and quality
+fft_size = 131072             # Reduce if OOM or high CPU (e.g., 65536)
+fft_threads = 1
+brightness_offset = 0
+audio_sps = 12000
+waterfall_size = 1024
+waterfall_compression = "zstd"  # Leave as "zstd" unless AV1 compiled
+audio_compression = "flac"      # Leave as "flac" unless Opus compiled
+accelerator = "none"            # "none" | "opencl" | "cuda" | "mkl" (only if compiled)
+smeter_offset = 0
+
+[input.driver]
+name = "stdin"
+format = "u8"                 # rtl_sdr outputs u8 IQ
+
+[input.defaults]
+frequency = 7100000
+modulation = "LSB"           # AM | SAM | FM | WBFM | USB | LSB

@@ -9,6 +9,7 @@
         default = "http_status:404";
         ingress = {
           "home-assistant.alexjameswright.net" = "http://localhost:8123";
+          "immich.alexjameswright.net" = "http://localhost:2283";
         };
       };
     };

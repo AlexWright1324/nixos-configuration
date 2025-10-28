@@ -3,8 +3,11 @@
 {
   imports = [
     ./home-assistant.nix
-    ./caddy.nix
     ./cloudflared.nix
+    ./caddy.nix
+    ./samba.nix
+    ./immich.nix
+    ./coredns.nix
   ];
 
   services = {

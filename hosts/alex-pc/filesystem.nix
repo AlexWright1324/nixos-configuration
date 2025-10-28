@@ -1,9 +1,4 @@
 {
-  boot.supportedFilesystems = [
-    "btrfs"
-    "ntfs"
-  ];
-
   fileSystems =
     let
       MainSSDBoot = "/dev/disk/by-uuid/4D2C-9454";
@@ -12,7 +7,7 @@
 
       btrfsOptions = [
         "compress=zstd"
-        "space_cache=v2"
+        "noatime"
       ];
     in
     {
@@ -20,6 +15,9 @@
       "/boot" = {
         device = MainSSDBoot;
         fsType = "vfat";
+        options = [
+          "umask=0077"
+        ];
       };
       "/" = {
         device = MainSSDBtrfs;
@@ -42,7 +40,6 @@
         fsType = "btrfs";
         options = [
           "subvol=@nixos-nix"
-          "noatime"
         ]
         ++ btrfsOptions;
       };

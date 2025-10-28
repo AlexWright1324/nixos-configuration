@@ -15,6 +15,9 @@
           paho-mqtt
           pyserial
           getmac
+          androidtvremote2
+          aiohomekit
+          kegtron-ble
         ];
       extraComponents = [
         "braviatv"
@@ -28,6 +31,8 @@
         "dhcp"
         "zha"
         "ibeacon"
+        "openai_conversation"
+        "google_assistant"
 
         # Onboarding
         "analytics"
@@ -38,8 +43,10 @@
 
         "isal" # Intelligent Storage Acceleration
       ];
-      customComponents = [
-        pkgs.home-assistant-custom-components.spook
+      customComponents = with pkgs.home-assistant-custom-components; [
+        spook
+        moonraker
+        octopus_energy
       ];
       config = null;
     };

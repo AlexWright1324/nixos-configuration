@@ -23,6 +23,12 @@
       cloudflared-home-assistant = {
         file = ./cloudflared/home-assistant.age;
       };
+
+      caddyEnvironmentFile = {
+        file = ../../../secrets/caddyEnvironmentFile.age;
+        owner = "caddy";
+        group = "caddy";
+      };
     };
   };
 }

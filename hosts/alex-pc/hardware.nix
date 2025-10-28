@@ -68,6 +68,7 @@
     };
     bluetooth.enable = true;
     rtl-sdr.enable = true;
+    cpu.amd.updateMicrocode = true;
   };
 
   # HIP Libraries

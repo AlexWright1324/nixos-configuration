@@ -12,7 +12,10 @@
       alexw = {
         isNormalUser = true;
         description = "Alex Wright";
-        extraGroups = [ "wheel" ];
+        extraGroups = [
+          "wheel"
+          "libvirtd"
+        ];
         hashedPasswordFile = config.age.secrets.hashedPassword.path;
       };
     };

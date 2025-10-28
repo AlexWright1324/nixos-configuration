@@ -4,18 +4,24 @@
     enable = true;
     wait-online.anyInterface = true;
     networks = {
-      "50-wired" = {
+      "10-wired" = {
         matchConfig.Name = "en*";
         networkConfig = {
-          DHCP = true;
+          DHCP = "ipv4";
+        };
+        dhcpV4Config = {
+          RouteMetric = 100;
         };
       };
 
-      "50-wireless" = {
+      "20-wireless" = {
         matchConfig.Name = "wl*";
         networkConfig = {
-          DHCP = true;
+          DHCP = "ipv4";
           IgnoreCarrierLoss = "3s";
+        };
+        dhcpV4Config = {
+          RouteMetric = 600;
         };
       };
     };

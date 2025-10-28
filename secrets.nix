@@ -18,9 +18,9 @@ in
   "secrets/passwords/hashedPassword.age".publicKeys = allSystemsAndUsers;
   "secrets/wifi/tshotc.age".publicKeys = allSystemsAndUsers;
   "secrets/cloudflared.age".publicKeys = allSystemsAndUsers;
+  "secrets/caddyEnvironmentFile.age".publicKeys = allSystemsAndUsers;
 
   "hosts/oracle/secrets/forwardingSecret.age".publicKeys = allSystemsAndUsers;
-  "hosts/oracle/secrets/caddyEnvironmentFile.age".publicKeys = allSystemsAndUsers;
 
   "hosts/xyber/secrets/cloudflared/home-assistant.age".publicKeys = [
     users.alexw

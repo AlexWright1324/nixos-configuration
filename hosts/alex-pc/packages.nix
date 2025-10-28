@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [
-    ../../packages/lact.nix
-  ];
-
   environment.systemPackages = with pkgs; [
     # CLI
     vim
@@ -53,6 +49,7 @@
       enable = true;
       scheduler = "scx_rusty";
     };
+    lact.enable = true;
   };
 
   programs = {

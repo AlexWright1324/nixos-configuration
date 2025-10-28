@@ -48,6 +48,7 @@
           ./aquila
         ];
       };
+
       "xyber" = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
@@ -55,7 +56,7 @@
         };
         modules = [
           ./xyber
-          self.nixosModules.googlefindmytools
+          #self.nixosModules.googlefindmytools # BROKEN
         ];
       };
     };

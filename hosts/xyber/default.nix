@@ -3,6 +3,7 @@
 }:
 {
   imports = [
+    ./virtualization.nix
     ./networking.nix
     ./hardware.nix
     ./disko.nix
@@ -32,6 +33,8 @@
   };
 
   zramSwap.enable = true;
+
+  systemd.enableEmergencyMode = false;
 
   # DO NOT EDIT
   system.stateVersion = "25.05";

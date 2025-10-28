@@ -18,7 +18,7 @@
         group = "minecraft";
       };
       caddyEnvironmentFile = {
-        file = ./caddyEnvironmentFile.age;
+        file = ../../../secrets/caddyEnvironmentFile.age;
         owner = "caddy";
         group = "caddy";
       };
