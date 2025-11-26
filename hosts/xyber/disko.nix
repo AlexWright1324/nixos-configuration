@@ -40,13 +40,6 @@
                     "noatime"
                   ];
                 };
-                "@nixos-home" = {
-                  mountpoint = "/home";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
-                };
                 "@nixos-nix" = {
                   mountpoint = "/nix";
                   mountOptions = [
@@ -88,6 +81,14 @@
               subvolumes = {
                 "@storage" = {
                   mountpoint = "/storage";
+                  mountOptions = [
+                    "nofail"
+                    "compress=zstd"
+                    "noatime"
+                  ];
+                };
+                "@home" = {
+                  mountpoint = "/home";
                   mountOptions = [
                     "nofail"
                     "compress=zstd"

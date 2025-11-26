@@ -1,26 +1,17 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   services = {
     home-assistant = {
       enable = true;
-      extraPackages =
-        python3Packages: with python3Packages; [
-          aiodiscover
-          aiodhcpwatcher
-          aiousbwatcher
-          async-upnp-client
-          av
-          go2rtc-client
-          pynacl
-          paho-mqtt
-          pyserial
-          getmac
-          androidtvremote2
-          aiohomekit
-          kegtron-ble
-        ];
+      # extraPackages = python3Packages: with python3Packages; [ ];
       extraComponents = [
+        "default_config"
+        "mqtt"
+        "upnp"
+        "androidtv_remote"
+        "homekit_controller"
         "braviatv"
+        "kegtron"
         "cast"
         "upnp"
         "ipp"
@@ -48,7 +39,96 @@
         moonraker
         octopus_energy
       ];
-      config = null;
+      config = {
+        default_config = { };
+        frontend.themes = "!include_dir_merge_named themes";
+        automation = "!include automations.yaml";
+        script = "!include scripts.yaml";
+        scene = "!include scenes.yaml";
+
+        http = {
+          use_x_forwarded_for = true;
+          trusted_proxies = [ "::1" ];
+        };
+
+        google_assistant = {
+          project_id = "home-assistant-alexjameswright";
+          service_account = "!include SERVICE_ACCOUNT.json"; # FIXME make secure and declarative with agenix
+          report_state = true;
+        };
+
+        media_player = [
+          {
+            platform = "universal";
+            name = "Sony TV";
+            unique_id = "sony_tv_combined";
+            device_class = "tv";
+
+            children = [
+              "media_player.bravia_xr_55a80j"
+              "media_player.sony_xr_55a80j"
+            ];
+
+            active_child_template = ''
+              {% if state_attr('media_player.bravia_xr_55a80j', 'media_content_id') %}
+                 media_player.bravia_xr_55a80j
+              {% endif %}
+            '';
+
+            attributes = {
+              source = "media_player.bravia_xr_55a80j|source";
+              source_list = "media_player.bravia_xr_55a80j|source_list";
+            };
+
+            browse_media_entity = "media_player.bravia_xr_55a80j";
+
+            commands = {
+              turn_off = {
+                action = "media_player.turn_off";
+                data.entity_id = "media_player.bravia_xr_55a80j";
+              };
+
+              turn_on = {
+                action = "media_player.turn_on";
+                data.entity_id = "media_player.bravia_xr_55a80j";
+              };
+
+              select_source = {
+                action = "media_player.select_source";
+                data = {
+                  entity_id = "media_player.bravia_xr_55a80j";
+                  source = ''{{ source }}'';
+                };
+              };
+
+              media_play = {
+                action = "media_player.media_play";
+                target.entity_id = "media_player.bravia_xr_55a80j";
+              };
+
+              media_pause = {
+                action = "media_player.media_pause";
+                target.entity_id = "media_player.bravia_xr_55a80j";
+              };
+
+              media_play_pause = {
+                action = "media_player.media_play_pause";
+                target.entity_id = "media_player.bravia_xr_55a80j";
+              };
+
+              media_previous_track = {
+                action = "media_player.media_previous_track";
+                target.entity_id = "media_player.bravia_xr_55a80j";
+              };
+
+              media_next_track = {
+                action = "media_player.media_next_track";
+                target.entity_id = "media_player.bravia_xr_55a80j";
+              };
+            };
+          }
+        ];
+      };
     };
 
     zigbee2mqtt = {
@@ -60,6 +140,7 @@
           adapter = "ember";
         };
         frontend = true;
+        availability = true;
       };
     };
 
@@ -75,9 +156,11 @@
     };
   };
 
+  systemd.services.zigbee2mqtt.preStart = lib.mkForce "";
+
   networking.firewall.allowedTCPPorts = [
     8123 # Home Assistant
-    1883 # MQTT
+    #1883 # MQTT
     8080 # Zigbee2MQTT
   ];
 }

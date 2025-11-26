@@ -3,6 +3,7 @@
 }:
 {
   imports = [
+    ../../modules/locale.nix
     ./virtualization.nix
     ./networking.nix
     ./hardware.nix

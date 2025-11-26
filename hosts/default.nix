@@ -56,7 +56,7 @@
         };
         modules = [
           ./xyber
-          #self.nixosModules.googlefindmytools # BROKEN
+          #FIXME: self.nixosModules.googlefindmytools
         ];
       };
     };

@@ -26,5 +26,6 @@ in
     users.alexw
     systems.xyber
   ];
+  "hosts/xyber/secrets/vaultwarden.age".publicKeys = allSystemsAndUsers;
 
 }

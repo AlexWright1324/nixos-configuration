@@ -10,6 +10,7 @@
         ingress = {
           "home-assistant.alexjameswright.net" = "http://localhost:8123";
           "immich.alexjameswright.net" = "http://localhost:2283";
+          "vaultwarden.alexjameswright.net" = "http://localhost:8222";
         };
       };
     };

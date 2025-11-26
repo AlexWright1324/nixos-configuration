@@ -29,6 +29,10 @@
         owner = "caddy";
         group = "caddy";
       };
+
+      vaultwarden = {
+        file = ./vaultwarden.age;
+      };
     };
   };
 }

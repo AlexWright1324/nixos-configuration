@@ -16,7 +16,7 @@
               version = "v1.13.0";
             }
           ];
-          vendorHash = "sha256-UYZgMTdT1UCMPoDUc9UV0sWinzKsdIrDX0EN2jiGdyQ=";
+          vendorHash = "sha256-ttCuaotPbRwmZOze0FBYmwBqG4gmfBtNs5VOQ70/ZaM=";
         }
       );
       config = ''
@@ -25,26 +25,19 @@
           metadata
           # prometheus
 
-          hosts /etc/coredns/hosts {
-            fallthrough
-          }
+          #template IN A home-assistant.alexjameswright.net immich.alexjameswright.net {
+          #  answer "{{ .Name }} 60 IN CNAME xyber-3.broadband"
+          #}
 
           blocklist https://big.oisd.nl {
-            bootstrap_dns 9.9.9.9:53
+            bootstrap_dns 1.1.1.1:53
           }
 
-          forward . 9.9.9.9 149.112.112.112 # Quad9
+          forward . 1.1.1.1 1.0.0.1
         }
       '';
     };
   };
 
-  environment.etc."coredns/hosts".text = ''
-    192.168.1.2 home-assistant.alexjameswright.net immich.alexjameswright.net
-  '';
-
-  networking.firewall = {
-    allowedTCPPorts = [ 53 ];
-    allowedUDPPorts = [ 53 ];
-  };
+  networking.firewall.enable = false; # FIXME TEMP
 }

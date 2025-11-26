@@ -28,7 +28,6 @@
           "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "nobody";
           "force group" = "users";
           "valid users" = "alexw";
         };

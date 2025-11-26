@@ -18,7 +18,7 @@ in
     package = pkgs.caddy.withPlugins {
       # https://github.com/caddy-dns/cloudflare
       plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2" ];
-      hash = "sha256-4qUWhrv3/8BtNCi48kk4ZvbMckh/cGRL7k+MFvXKbTw=";
+      hash = "sha256-ea8PC/+SlPRdEVVF/I3c1CBprlVp1nrumKM5cMwJJ3U=";
     };
 
     virtualHosts = {
@@ -28,6 +28,10 @@ in
       + cloudflare;
       "immich.alexjameswright.net".extraConfig = ''
         reverse_proxy localhost:2283
+      ''
+      + cloudflare;
+      "vaultwarden.alexjameswright.net".extraConfig = ''
+        reverse_proxy unix//run/vaultwarden/vaultwarden.sock
       ''
       + cloudflare;
     };

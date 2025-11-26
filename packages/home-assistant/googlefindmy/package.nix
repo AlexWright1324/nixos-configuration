@@ -7,13 +7,13 @@ buildHomeAssistantComponent rec {
   # https://github.com/BSkando/GoogleFindMy-HA
   owner = "BSkando";
   domain = "googlefindmy";
-  version = "1.6-beta3";
+  version = "1.6.0";
 
   src = fetchFromGitHub {
     owner = "BSkando";
     repo = "GoogleFindMy-HA";
     rev = "V${version}";
-    sha256 = "sha256-sntZpIRuAt4746G5u2mc8Wn1V7VEyUWR1gASY9/HCPA=";
+    sha256 = "sha256-BDzYu/LLKThzvGJJowa+ZF8f/XHg8+++EpmOrJEymtg=";
   };
 
   propagatedBuildInputs = with home-assistant.python.pkgs; [
@@ -22,7 +22,6 @@ buildHomeAssistantComponent rec {
     pyscrypt
     cryptography
     pycryptodomex
-    ecdsa
     pytz
     protobuf
     httpx
@@ -33,5 +32,9 @@ buildHomeAssistantComponent rec {
     requests
     undetected-chromedriver
     selenium
+  ];
+
+  permittedInsecurePackages = [
+    "python3.13-ecdsa-0.19.1"
   ];
 }

@@ -4,10 +4,12 @@
   imports = [
     ./home-assistant.nix
     ./cloudflared.nix
+    ./vaultwarden.nix
+    ./sunshine.nix
+    ./coredns.nix
+    ./immich.nix
     ./caddy.nix
     ./samba.nix
-    ./immich.nix
-    ./coredns.nix
   ];
 
   services = {
