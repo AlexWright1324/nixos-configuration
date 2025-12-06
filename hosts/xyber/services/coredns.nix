@@ -39,5 +39,8 @@
     };
   };
 
-  networking.firewall.enable = false; # FIXME TEMP
+  networking.firewall = {
+    allowedUDPPorts = [ 53 ];
+    allowedTCPPorts = [ 53 ];
+  };
 }

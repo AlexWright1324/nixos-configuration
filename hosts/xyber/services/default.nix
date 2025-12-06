@@ -7,6 +7,7 @@
     ./vaultwarden.nix
     ./sunshine.nix
     ./coredns.nix
+    ./kanidm.nix
     ./immich.nix
     ./caddy.nix
     ./samba.nix

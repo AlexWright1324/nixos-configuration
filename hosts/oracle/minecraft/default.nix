@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   imports = [
     inputs.nix-minecraft.nixosModules.minecraft-servers
@@ -9,10 +9,16 @@
     ./keira
   ];
 
-  nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
+  nixpkgs.overlays = lib.mkForce [ inputs.nix-minecraft.overlay ];
 
   services.minecraft-servers = {
     enable = true;
     eula = true;
+  };
+
+  age.secrets.forwardingSecret = {
+    file = ./forwardingSecret.age;
+    owner = "minecraft";
+    group = "minecraft";
   };
 }

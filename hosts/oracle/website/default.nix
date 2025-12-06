@@ -20,7 +20,7 @@ in
     package = pkgs.caddy.withPlugins {
       # https://github.com/caddy-dns/cloudflare
       plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
-      hash = "sha256-j+xUy8OAjEo+bdMOkQ1kVqDnEkzKGTBIbMDVL7YDwDY=";
+      hash = "sha256-Dvifm7rRwFfgXfcYvXcPDNlMaoxKd5h4mHEK6kJ+T4A=";
     };
 
     virtualHosts."alexjameswright.net".extraConfig = ''

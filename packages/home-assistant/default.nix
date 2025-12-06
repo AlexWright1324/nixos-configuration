@@ -1,27 +1,14 @@
 {
-  moduleWithSystem,
   ...
 }:
 {
-  perSystem =
-    { pkgs, ... }:
-    {
-      packages.home-assistant-googlefindmy = pkgs.callPackage ./googlefindmy/package.nix { };
-      packages.googlefindmytools = pkgs.callPackage ./googlefindmy/cli.nix { };
+  flake.overlays.home-assistant = final: prev: {
+    home-assistant-custom-components = prev.home-assistant-custom-components // {
+      googlefindmy = prev.callPackage ./googlefindmy/package.nix { };
+      linksys_velop = prev.callPackage ./linksys_velop.nix {
+        pyvelop = prev.home-assistant.python.pkgs.callPackage ./pyvelop.nix { };
+      };
     };
-
-  flake.nixosModules = {
-    googlefindmytools = moduleWithSystem (
-      perSystem@{ config, ... }:
-      {
-        config,
-        ...
-      }:
-      {
-        config.services.home-assistant.customComponents = [
-          perSystem.config.packages.home-assistant-googlefindmy
-        ];
-      }
-    );
+    googlefindmytools = prev.callPackage ./googlefindmy/cli.nix { };
   };
 }

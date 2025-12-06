@@ -4,6 +4,7 @@
     home-assistant = {
       enable = true;
       # extraPackages = python3Packages: with python3Packages; [ ];
+
       extraComponents = [
         "default_config"
         "mqtt"
@@ -34,11 +35,14 @@
 
         "isal" # Intelligent Storage Acceleration
       ];
+
       customComponents = with pkgs.home-assistant-custom-components; [
         spook
         moonraker
         octopus_energy
+        linksys_velop
       ];
+
       config = {
         default_config = { };
         frontend.themes = "!include_dir_merge_named themes";

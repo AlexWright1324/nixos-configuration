@@ -21,6 +21,7 @@ in
   "secrets/caddyEnvironmentFile.age".publicKeys = allSystemsAndUsers;
 
   "hosts/oracle/secrets/forwardingSecret.age".publicKeys = allSystemsAndUsers;
+  "hosts/oracle/secrets/shackbotEnvironmentFile.age".publicKeys = allSystemsAndUsers;
 
   "hosts/xyber/secrets/cloudflared/home-assistant.age".publicKeys = [
     users.alexw

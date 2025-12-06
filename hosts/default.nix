@@ -1,64 +1,48 @@
 {
-  self,
+  withSystem,
   inputs,
   ...
 }:
+let
+  mkNixosSystem =
+    system: modules:
+    inputs.nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs;
+      };
+      modules = modules ++ [
+        inputs.nixpkgs.nixosModules.readOnlyPkgs
+        {
+          nixpkgs.pkgs = withSystem system ({ pkgs, ... }: pkgs);
+        }
+      ];
+    };
+in
 {
   flake = {
     nixosConfigurations = {
-      "Alex-PC-NixOS" = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          ./alex-pc
-        ];
-      };
+      "Alex-PC-NixOS" = mkNixosSystem "x86_64-linux" [
+        ./alex-pc
+      ];
 
-      "Frank-Laptop-NixOS" = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          ./frank-laptop
-        ];
-      };
+      "Frank-Laptop-NixOS" = mkNixosSystem "x86_64-linux" [
+        ./frank-laptop
+      ];
 
-      "oracle" = inputs.nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          ./oracle
-        ];
-      };
+      "oracle" = mkNixosSystem "aarch64-linux" [
+        ./oracle
+      ];
 
-      "aquila" = inputs.nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          # Build NixOS SD card image for Aquila
-          # > nix build .#nixosConfigurations.aquila.config.system.build.sdImage
-          "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-          ./aquila
-        ];
-      };
+      "aquila" = mkNixosSystem "aarch64-linux" [
+        # Build NixOS SD card image for Aquila
+        # > nix build .#nixosConfigurations.aquila.config.system.build.sdImage
+        "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+        ./aquila
+      ];
 
-      "xyber" = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          ./xyber
-          #FIXME: self.nixosModules.googlefindmytools
-        ];
-      };
+      "xyber" = mkNixosSystem "x86_64-linux" [
+        ./xyber
+      ];
     };
   };
 }

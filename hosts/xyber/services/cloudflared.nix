@@ -8,9 +8,10 @@
         credentialsFile = config.age.secrets.cloudflared-home-assistant.path;
         default = "http_status:404";
         ingress = {
-          "home-assistant.alexjameswright.net" = "http://localhost:8123";
-          "immich.alexjameswright.net" = "http://localhost:2283";
-          "vaultwarden.alexjameswright.net" = "http://localhost:8222";
+          "*.alexjameswright.net" = {
+            service = "https://localhost:443";
+            originRequest.originServerName = "*.alexjameswright.net";
+          };
         };
       };
     };

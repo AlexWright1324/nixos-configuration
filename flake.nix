@@ -35,6 +35,10 @@
       url = "git+ssh://git@github.com/alexwright1324/alexjameswright.net";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    shackbot = {
+      url = "github:alexwright1324/shackbot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Development tooling
     flake-parts = {

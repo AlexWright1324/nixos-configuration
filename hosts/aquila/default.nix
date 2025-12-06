@@ -13,11 +13,6 @@
     ./services
   ];
 
-  nixpkgs = {
-    config.allowUnfree = true;
-    hostPlatform = "aarch64-linux";
-  };
-
   nix = {
     settings = {
       experimental-features = [

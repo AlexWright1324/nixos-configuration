@@ -12,15 +12,15 @@
       hashedPassword = {
         file = ../../../secrets/passwords/hashedPassword.age;
       };
-      forwardingSecret = {
-        file = ./forwardingSecret.age;
-        owner = "minecraft";
-        group = "minecraft";
-      };
       caddyEnvironmentFile = {
         file = ../../../secrets/caddyEnvironmentFile.age;
         owner = "caddy";
         group = "caddy";
+      };
+      shackbotEnvironmentFile = {
+        file = ./shackbotEnvironmentFile.age;
+        owner = "shackbot";
+        group = "shackbot";
       };
     };
   };

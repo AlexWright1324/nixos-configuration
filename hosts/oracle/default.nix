@@ -9,19 +9,15 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./filesystem.nix
     ./packages.nix
+    ./shackbot.nix
     ./users.nix
-    ./minecraft
+    #./minecraft # Disabled for now
     ./website
     ./secrets
     ../../modules/locale.nix
     ../../modules/fastBoot.nix
     ../../modules/scripts.nix
   ];
-
-  nixpkgs = {
-    config.allowUnfree = true;
-    hostPlatform = lib.mkDefault "aarch64-linux";
-  };
 
   nix = {
     settings = {
