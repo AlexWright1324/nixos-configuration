@@ -713,11 +713,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1765056943,
-        "narHash": "sha256-cKOWXTTWjVz4EVLV2mEEHhybcfkU3kHZmGHQ7TdoF8s=",
+        "lastModified": 1765404875,
+        "narHash": "sha256-6qrAnCSmV+xRD7KrAow6hLBNhFNtAu8urlPQrpYN9yk=",
         "owner": "alexwright1324",
         "repo": "shackbot",
-        "rev": "cb49e6a462c0be4a04152637c240d3679f77a066",
+        "rev": "2b3480564546a6a9b7d9806ca6cc43aa0435250e",
         "type": "github"
       },
       "original": {

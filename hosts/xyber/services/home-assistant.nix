@@ -25,6 +25,10 @@
         "ibeacon"
         "openai_conversation"
         "google_assistant"
+        "wyoming"
+        "whisper"
+        "wake_word"
+        "ollama"
 
         # Onboarding
         "analytics"
@@ -157,6 +161,24 @@
           settings.allow_anonymous = true;
         }
       ];
+    };
+
+    wyoming = {
+      piper.servers.default = {
+        enable = true;
+        voice = "en_GB-cori-high";
+        uri = "tcp://localhost:10200"; # TODO: Unix socket
+      };
+      faster-whisper.servers.default = {
+        enable = true;
+        language = "en";
+        model = "base.en";
+        uri = "tcp://localhost:10300"; # TODO: Unix socket
+      };
+      openwakeword = {
+        enable = true;
+        uri = "tcp://localhost:10400"; # TODO: Unix socket
+      };
     };
   };
 
