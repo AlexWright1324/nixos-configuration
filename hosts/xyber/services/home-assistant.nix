@@ -29,6 +29,7 @@
         "whisper"
         "wake_word"
         "ollama"
+        "reolink"
 
         # Onboarding
         "analytics"

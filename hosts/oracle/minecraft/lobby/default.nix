@@ -5,8 +5,10 @@
 
     package = pkgs.velocityServers.velocity.overrideAttrs (oldAttrs: {
       src = pkgs.fetchurl {
-        url = "https://github.com/BoomEaro/NanoLimbo/releases/download/1.21.5_1.9_1/NanoLimbo-1.9.1-all.jar";
-        hash = "sha256-z33SIlt/qqiTLjS/zmJ5h9TAqJLV608HgAd8xLMN9X8=";
+        pname = "NanoLimbo";
+        url = "https://github.com/BoomEaro/NanoLimbo/releases/download/1.10.2/NanoLimbo.jar";
+        version = "1.10.2";
+        hash = "sha256-GVNpXTIAN+oed5m5Dz/pCpn04lEvTybl2K5b0xKYUxE=";
       };
     });
   };

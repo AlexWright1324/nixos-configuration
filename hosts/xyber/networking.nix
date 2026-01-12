@@ -3,14 +3,30 @@
   systemd.network = {
     enable = true;
     wait-online.anyInterface = true;
+
+    netdevs = {
+      "br-lan" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "br-lan";
+        };
+      };
+    };
+
     networks = {
-      "10-wired" = {
-        matchConfig.Name = "en*";
+      "10-br-lan" = {
+        matchConfig.Name = "br-lan";
         networkConfig = {
           DHCP = "ipv4";
         };
         dhcpV4Config = {
           RouteMetric = 100;
+        };
+      };
+      "20-ethernet" = {
+        matchConfig.Name = "en*";
+        networkConfig = {
+          Bridge = "br-lan";
         };
       };
 

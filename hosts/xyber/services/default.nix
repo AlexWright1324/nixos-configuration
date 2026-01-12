@@ -7,7 +7,7 @@
     ./vaultwarden.nix
     ./smokeping.nix
     ./sunshine.nix
-    ./coredns.nix
+    # ./coredns.nix Disabled due to instability
     ./rtl-sdr.nix
     ./kanidm.nix
     ./immich.nix

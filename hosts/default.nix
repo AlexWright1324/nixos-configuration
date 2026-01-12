@@ -11,7 +11,6 @@ let
         inherit inputs;
       };
       modules = modules ++ [
-        inputs.nixpkgs.nixosModules.readOnlyPkgs
         {
           nixpkgs.pkgs = withSystem system ({ pkgs, ... }: pkgs);
         }

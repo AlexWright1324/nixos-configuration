@@ -61,9 +61,6 @@
     }
   ];
 
-  # Not needed in 25.11 hopefully
-  system.rebuild.enableNg = true;
-
   # DO NOT EDIT
   system.stateVersion = "23.11";
 }

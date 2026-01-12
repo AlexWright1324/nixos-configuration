@@ -6,7 +6,8 @@
     ./velocity
     ./xbox
     ./lobby
-    ./keira
+    # ./keira # Disabled until keira wants it :P
+    ./2026
   ];
 
   nixpkgs.overlays = lib.mkForce [ inputs.nix-minecraft.overlay ];
@@ -17,7 +18,7 @@
   };
 
   age.secrets.forwardingSecret = {
-    file = ./forwardingSecret.age;
+    file = ../secrets/forwardingSecret.age;
     owner = "minecraft";
     group = "minecraft";
   };

@@ -17,6 +17,7 @@
         extraGroups = [
           "wheel"
           "libvirtd"
+          "dialout"
         ];
         subUidRanges = [
           {

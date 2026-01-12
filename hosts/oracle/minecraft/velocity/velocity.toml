@@ -79,6 +79,7 @@ enable-player-address-logging = true
 # represents the IP address of the server to connect to.
 lobby = "127.0.0.1:30000"
 keira = "127.0.0.1:30001"
+sogcraft = "127.0.0.1:30002"
 
 # In what order we should try servers when a player logs in or is kicked from a server.
 try = [
@@ -89,6 +90,9 @@ try = [
 # Configure your forced hosts here.
 "keira.play.alexjameswright.net" = [
     "keira"
+]
+"sogcraft.play.alexjameswright.net" = [
+    "sogcraft"
 ]
 
 [advanced]

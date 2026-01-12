@@ -25,15 +25,16 @@
           metadata
           # prometheus
 
-          #template IN A home-assistant.alexjameswright.net immich.alexjameswright.net {
-          #  answer "{{ .Name }} 60 IN CNAME xyber-3.broadband"
-          #}
-
           blocklist https://big.oisd.nl {
-            bootstrap_dns 1.1.1.1:53
+            bootstrap_dns 9.9.9.9:53
           }
 
-          forward . 1.1.1.1 1.0.0.1
+          cache
+
+          forward . tls://[2620:fe::fe]:853 tls://9.9.9.9:853 {
+            tls_servername dns.quad9.net
+            health_check 15s
+          }
         }
       '';
     };

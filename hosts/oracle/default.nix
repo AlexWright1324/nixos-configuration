@@ -11,7 +11,7 @@
     ./packages.nix
     ./shackbot.nix
     ./users.nix
-    #./minecraft # Disabled for now
+    ./minecraft
     ./website
     ./secrets
     ../../modules/locale.nix

@@ -50,6 +50,11 @@
       scheduler = "scx_rusty";
     };
     lact.enable = true;
+    sunshine = {
+      enable = true;
+      capSysAdmin = true;
+      openFirewall = true;
+    };
   };
 
   programs = {
